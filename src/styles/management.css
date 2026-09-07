@@ -1,0 +1,440 @@
+/* Management — an operations console: dark hero, numbered rail, and a scope
+   matrix that reads like a contract annex. Nothing here is a photo grid: that
+   language belongs to Rent & Sale. */
+
+.mg-page {
+  background: var(--cream);
+}
+.mg-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin: 0 0 14px;
+}
+
+/* Hero */
+.mg-hero {
+  background: var(--navy);
+  color: var(--cream);
+  padding: 150px 5% 80px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+.mg-kicker {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--sky);
+  margin: 0 0 22px;
+}
+.mg-hero h1 {
+  font-size: 56px;
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+  margin: 0 0 22px;
+}
+.mg-hero-copy > p {
+  font-size: 16px;
+  line-height: 1.75;
+  color: rgba(248, 241, 228, 0.75);
+  max-width: 52ch;
+  margin: 0 0 32px;
+}
+.mg-hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  flex-wrap: wrap;
+}
+.mg-button {
+  background: var(--cream);
+  color: var(--navy);
+  border-color: var(--cream);
+}
+.mg-ghost-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  color: var(--sky);
+  padding-bottom: 5px;
+  border-bottom: 1px solid rgba(216, 227, 255, 0.5);
+}
+.mg-hero-panel {
+  position: relative;
+}
+.mg-hero-panel img {
+  width: 100%;
+  height: 460px;
+  object-fit: cover;
+  border-radius: 2px;
+}
+.mg-hero-stats {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-top: 0;
+}
+.mg-hero-stats > div {
+  padding: 18px 16px;
+  border-inline-end: 1px solid rgba(255, 255, 255, 0.2);
+}
+.mg-hero-stats > div:last-child {
+  border-inline-end: 0;
+}
+.mg-hero-stats dt {
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(248, 241, 228, 0.6);
+  margin-bottom: 7px;
+}
+.mg-hero-stats dd {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--cream);
+}
+
+/* Shared section heading */
+.mg-head {
+  max-width: 1240px;
+  margin: 0 auto 42px;
+}
+.mg-head h2 {
+  font-size: 38px;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--navy);
+  margin: 0 0 14px;
+}
+.mg-head > p {
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--muted);
+  max-width: 62ch;
+  margin: 0;
+}
+
+/* Lifecycle rail */
+.mg-lifecycle {
+  padding: 80px 5%;
+}
+.mg-rail {
+  max-width: 1240px;
+  margin: auto;
+  list-style: none;
+  padding: 0;
+  counter-reset: rail;
+}
+.mg-rail li {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 30px;
+  padding: 30px 0;
+  border-top: 1px solid var(--line);
+  align-items: start;
+  transition: background 0.3s ease;
+}
+.mg-rail li:last-child {
+  border-bottom: 1px solid var(--line);
+}
+.mg-rail li:hover {
+  background: rgba(36, 87, 255, 0.03);
+}
+.mg-rail-number {
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--sand);
+}
+.mg-rail h3 {
+  margin: 0 0 10px;
+  font-size: 21px;
+  color: var(--navy);
+}
+.mg-rail p {
+  margin: 0 0 12px;
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--muted);
+  max-width: 76ch;
+}
+.mg-rail small {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--blue);
+}
+
+/* Scope matrix */
+.mg-scope {
+  background: #fffdf9;
+  border-block: 1px solid var(--line);
+  padding: 80px 5%;
+}
+.mg-scope-inner {
+  max-width: 1240px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 60px;
+  align-items: start;
+}
+.mg-scope .mg-head {
+  margin: 0;
+}
+.mg-matrix {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--line);
+}
+.mg-matrix li {
+  display: grid;
+  grid-template-columns: 24px 1fr auto;
+  gap: 14px;
+  align-items: center;
+  padding: 15px 18px;
+  border-bottom: 1px solid var(--line);
+  font-size: 14px;
+  color: var(--navy);
+}
+.mg-matrix li:last-child {
+  border-bottom: 0;
+}
+.mg-matrix .material-symbols-outlined {
+  font-size: 19px;
+}
+.mg-matrix .is-in .material-symbols-outlined,
+.mg-matrix li.is-in .material-symbols-outlined {
+  color: var(--blue);
+}
+.mg-matrix li.is-out {
+  background: rgba(183, 173, 158, 0.12);
+  color: var(--muted);
+}
+.mg-matrix li.is-out .material-symbols-outlined {
+  color: var(--sand);
+}
+.mg-matrix small {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: var(--sky);
+  color: var(--navy);
+  white-space: nowrap;
+}
+.mg-matrix li.is-out small {
+  background: transparent;
+  border: 1px solid var(--sand);
+  color: var(--muted);
+}
+
+/* Assets strip */
+.mg-assets {
+  padding: 80px 5%;
+}
+.mg-assets-strip {
+  max-width: 1240px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+.mg-assets-strip figure {
+  margin: 0;
+}
+.mg-assets-strip img {
+  width: 100%;
+  height: 230px;
+  object-fit: cover;
+  filter: grayscale(0.25);
+  transition: filter 0.35s ease;
+}
+.mg-assets-strip figure:hover img {
+  filter: none;
+}
+.mg-assets-strip figcaption {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--navy);
+}
+
+/* Reporting */
+.mg-reporting {
+  background: var(--navy);
+  color: var(--cream);
+  padding: 80px 5%;
+}
+.mg-reporting-inner {
+  max-width: 1240px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+.mg-reporting .mg-eyebrow {
+  color: var(--sky);
+}
+.mg-reporting-copy h2 {
+  font-size: 34px;
+  line-height: 1.15;
+  margin: 0 0 16px;
+}
+.mg-reporting-copy > p {
+  font-size: 15px;
+  line-height: 1.75;
+  color: rgba(248, 241, 228, 0.75);
+  margin: 0 0 26px;
+  max-width: 50ch;
+}
+.mg-reporting-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.mg-reporting-list li {
+  padding: 22px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+}
+.mg-reporting-list li:last-child {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+}
+.mg-reporting-list strong {
+  display: block;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--sky);
+  margin-bottom: 8px;
+}
+.mg-reporting-list p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.7;
+  color: rgba(248, 241, 228, 0.85);
+}
+
+/* Guarantee */
+.mg-guarantee {
+  max-width: 1240px;
+  margin: auto;
+  padding: 80px 5%;
+  display: grid;
+  grid-template-columns: 1fr 0.85fr;
+  gap: 60px;
+  align-items: center;
+}
+.mg-guarantee h2 {
+  font-size: 34px;
+  color: var(--navy);
+  margin: 0 0 16px;
+}
+.mg-guarantee-copy > p {
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--muted);
+  margin: 0 0 26px;
+}
+.mg-guarantee ul {
+  list-style: none;
+  margin: 0 0 26px;
+  padding: 0;
+}
+.mg-guarantee li {
+  display: flex;
+  gap: 14px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--line);
+}
+.mg-guarantee li .material-symbols-outlined {
+  color: var(--blue);
+  font-size: 20px;
+}
+.mg-guarantee h4 {
+  margin: 0 0 5px;
+  font-size: 15px;
+  color: var(--navy);
+}
+.mg-guarantee li p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+.mg-guarantee img {
+  width: 100%;
+  height: 520px;
+  object-fit: cover;
+}
+.mg-text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--blue);
+}
+.mg-text-link .material-symbols-outlined {
+  font-size: 17px;
+}
+
+@media (max-width: 1000px) {
+  .mg-hero,
+  .mg-scope-inner,
+  .mg-reporting-inner,
+  .mg-guarantee {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .mg-hero {
+    padding: 120px 5% 60px;
+  }
+  .mg-hero h1 {
+    font-size: 38px;
+  }
+  .mg-head h2 {
+    font-size: 29px;
+  }
+  .mg-assets-strip {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .mg-guarantee img {
+    height: 320px;
+  }
+}
+@media (max-width: 640px) {
+  .mg-rail li {
+    grid-template-columns: 60px 1fr;
+    gap: 16px;
+  }
+  .mg-rail-number {
+    font-size: 26px;
+  }
+  .mg-lifecycle,
+  .mg-scope,
+  .mg-assets,
+  .mg-reporting,
+  .mg-guarantee {
+    padding: 56px 5%;
+  }
+  .mg-matrix li {
+    grid-template-columns: 22px 1fr;
+    row-gap: 8px;
+  }
+  .mg-matrix small {
+    grid-column: 2;
+    justify-self: start;
+  }
+}

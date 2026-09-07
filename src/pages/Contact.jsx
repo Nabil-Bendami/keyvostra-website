@@ -1,58 +1,77 @@
-import UKContact from "../components/UKContact";
-import Icon from "../components/Icon";
+import { useTranslation } from "../i18n";
 import SEO from "../components/SEO";
 import ContactForm from "../components/ContactForm";
-import { site } from "../data/siteData";
+import ContactChannels from "../components/ContactChannels";
+import WhatsAppButton from "../components/WhatsAppButton";
+import { contactChannels, ukChannels } from "../data/siteData";
+import { generalWhatsAppMessage, serviceCategories } from "../data/services";
+import Icon from "../components/Icon";
+import { Link } from "react-router-dom";
+
 export default function Contact() {
+  const { t } = useTranslation();
   return (
     <div className="home-page">
       <SEO
-        title="Contact — Keyvostra Group"
-        description="Parlons de votre projet immobilier. Retrouvez Keyvostra Group au Maroc et au Royaume-Uni."
+        title={t("Contact — Keyvostra Group")}
+        description={t(
+          "Parlons de votre projet immobilier. Retrouvez Keyvostra Group au Maroc et au Royaume-Uni.",
+        )}
         path="/contact"
       />
       <section className="kv-section contact-section">
         <div>
-          <p className="eyebrow">KEYVOSTRA GROUP · CONTACT</p>
+          <p className="eyebrow">{t("KEYVOSTRA GROUP · CONTACT")}</p>
           <h1 className="contact-title">
-            Tout commence par
+            {t("Tout commence par")}
             <br />
-            <em>une conversation.</em>
+            <em>{t("une conversation.")}</em>
           </h1>
           <p>
-            Investissement, gestion ou maintenance : présentez-nous votre projet
-            au Maroc ou au Royaume-Uni pour échanger sur vos besoins.
+            {t(
+              "Investissement, gestion ou maintenance : présentez-nous votre projet au Maroc ou au Royaume-Uni pour échanger sur vos besoins.",
+            )}
           </p>
-          <a className="contact-email" href={`mailto:${site.contact.email}`}>
-            {site.contact.email} ↗
-          </a>
-          <div className="contact-phones">
-            {site.contact.phones.map((phone) => (
-              <a href={phone.href} key={phone.href}>
-                <Icon name="call" />
-                {phone.label}
-              </a>
-            ))}
-          </div>
-          <div className="address-block">
-            <div>
-              <strong>Sidi Maarouf</strong>
-              <p>Casablanca, Maroc</p>
-              <a
-                href="https://www.google.com/maps/search/?api=1&query=Sidi+Maarouf+Casablanca"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Voir le quartier sur la carte ↗
-              </a>
-            </div>
-          </div>
-          <UKContact />
+          <ContactChannels
+            heading="Nous joindre · Maroc"
+            channels={contactChannels}
+            className="contact-page-channels"
+          />
+          <ContactChannels
+            heading="Nous joindre · Royaume-Uni"
+            channels={ukChannels}
+            className="contact-page-channels"
+          />
+          <WhatsAppButton
+            message={generalWhatsAppMessage}
+            note="Le plus rapide : un message WhatsApp avec votre ville et votre besoin."
+            className="contact-page-wa"
+          />
         </div>
         <div className="home-form">
-          <h3>Parlez-nous de votre projet</h3>
-          <p>Quelques mots pour faire le premier pas.</p>
+          <h3>{t("Parlez-nous de votre projet")}</h3>
+          <p>{t("Quelques mots pour faire le premier pas.")}</p>
           <ContactForm />
+          <div className="contact-direct">
+            <p className="contact-direct-heading">
+              {t("Écrire directement au bon service")}
+            </p>
+            <ul>
+              {serviceCategories.map((category) => (
+                <li key={category.key}>
+                  <Link to={`${category.to}#demande`}>
+                    <span>{t(category.label)}</span>
+                    <Icon name="arrow_outward" />
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <small>
+              {t(
+                "Chaque service a son propre formulaire : votre message arrive avec le bon objet, chez la bonne personne.",
+              )}
+            </small>
+          </div>
         </div>
       </section>
     </div>

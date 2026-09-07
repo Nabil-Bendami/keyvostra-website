@@ -1,167 +1,298 @@
+import { useTranslation } from "../i18n";
 import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
 import Icon from "../components/Icon";
+import WhatsAppButton from "../components/WhatsAppButton";
+import ServiceInquiry from "../components/ServiceInquiry";
+import { serviceByPath } from "../data/services";
+import "../styles/management.css";
+
+const category = serviceByPath["/management"];
+
+const lifecycle = [
+  [
+    "01",
+    "Targeted Marketing",
+    "We position your property to attract high-caliber tenants through professional photography, targeted digital campaigns, and exclusive network outreach in the corporate sector.",
+    "Photos · Annonces · Réseau direct",
+  ],
+  [
+    "02",
+    "Rigorous Screening",
+    "Comprehensive background checks, financial verification, and employment history review to ensure long-term stability and reliability.",
+    "Revenus · Garanties · Références",
+  ],
+  [
+    "03",
+    "Bail & entrée dans les lieux",
+    "Rédaction du bail, état des lieux photographié, relevé des compteurs et remise des clés : tout est daté et archivé.",
+    "Bail · État des lieux · Compteurs",
+  ],
+  [
+    "04",
+    "Active Maintenance",
+    "24/7 proactive and reactive maintenance coordination using our vetted network of premium contractors.",
+    "Astreinte · Devis · Suivi de chantier",
+  ],
+  [
+    "05",
+    "Transparent Financials",
+    "Real-time access to statements, automated rent collection, and detailed quarterly performance reports to keep you informed without the operational headache.",
+    "Encaissement · Relances · Reporting",
+  ],
+];
+
+// What the fee actually covers, said plainly, versus what is quoted separately.
+const scope = [
+  ["Recherche et sélection du locataire", true],
+  ["Rédaction du bail et état des lieux", true],
+  ["Encaissement des loyers et relances", true],
+  ["Coordination des petites réparations", true],
+  ["Reporting écrit et relevé de charges", true],
+  ["Représentation face au syndic", true],
+  ["Travaux de rénovation et gros œuvre", false],
+  ["Ameublement et équipement du bien", false],
+  ["Procédure contentieuse et recouvrement judiciaire", false],
+];
+
+const assets = [
+  [
+    "/images/projects/residential.jpg",
+    "Illustration : intérieur lumineux d’un logement meublé mis en gestion.",
+    "Appartements meublés & vides",
+  ],
+  [
+    "/images/projects/management.jpg",
+    "Illustration : appartement aménagé représentant la gestion résidentielle.",
+    "Résidences & locations meublées",
+  ],
+  [
+    "/images/aerial-neighborhood.jpg",
+    "Illustration : vue aérienne d’un quartier résidentiel avec plusieurs immeubles.",
+    "Immeubles entiers & lots multiples",
+  ],
+  [
+    "/images/office-tower-glass.jpg",
+    "Illustration : tour de bureaux vitrée représentant les surfaces professionnelles gérées.",
+    "Bureaux & locaux professionnels",
+  ],
+];
+
+const reporting = [
+  ["Chaque mois", "Relevé des loyers encaissés, impayés éventuels, dépenses engagées."],
+  ["Chaque trimestre", "Rapport de performance : occupation, rendement net, points de vigilance."],
+  ["À chaque incident", "Photo, devis, décision demandée — rien n’est engagé sans votre accord au-delà du seuil convenu."],
+];
 
 export default function Management() {
+  const { t } = useTranslation();
   return (
     <>
       <SEO
-        title="Keyvostra Management - Property Management in Casablanca"
-        description="Effortless, transparent property management in Casablanca: targeted marketing, rigorous tenant screening, active maintenance coordination, and real-time financial reporting."
+        title={t("Keyvostra Management - Property Management in Casablanca")}
+        description={t(
+          "Effortless, transparent property management in Casablanca: targeted marketing, rigorous tenant screening, active maintenance coordination, and real-time financial reporting.",
+        )}
         path="/management"
       />
 
-      <div className="pt-24 md:pt-32 pb-section-padding">
-        {/* Hero */}
-        <section className="px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto mt-12 md:mt-24">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-center">
-            <div className="lg:col-span-6 z-10">
-              <h1 className="font-display-lg text-headline-lg-mobile md:text-display-lg text-on-surface mb-6">
-                Effortless Property Management
-              </h1>
-              <p className="font-body-lg text-body-lg text-on-surface-variant mb-10 max-w-lg">
-                Maximize your returns while minimizing your involvement. We handle everything from rigorous tenant
-                screening to seamless daily maintenance with total transparency.
-              </p>
-              <div className="flex flex-wrap gap-4">
-                <Link
-                  to="/contact"
-                  className="bg-primary text-on-primary font-label-md text-label-md px-8 py-4 rounded hover:opacity-90 transition-opacity"
-                >
-                  Book a Consultation
-                </Link>
-                <a
-                  href="#lifecycle"
-                  className="border border-on-surface text-on-surface font-label-md text-label-md px-8 py-4 rounded hover:bg-surface-variant transition-colors"
-                >
-                  Our Process
-                </a>
+      <div className="mg-page">
+        {/* Hero — dark control room */}
+        <section className="mg-hero">
+          <div className="mg-hero-copy">
+            <p className="mg-kicker">
+              {t("KEYVOSTRA MANAGEMENT · CASABLANCA & UK")}
+            </p>
+            <h1>{t("Effortless Property Management")}</h1>
+            <p>
+              {t(
+                "Maximize your returns while minimizing your involvement. We handle everything from rigorous tenant screening to seamless daily maintenance with total transparency.",
+              )}
+            </p>
+            <div className="mg-hero-actions">
+              <a href="#demande" className="kv-button mg-button">
+                {t("Book a Consultation")}
+                <Icon name="arrow_outward" />
+              </a>
+              <a href="#lifecycle" className="mg-ghost-link">
+                {t("Our Process")}
+                <Icon name="south" />
+              </a>
+            </div>
+          </div>
+          <div className="mg-hero-panel">
+            <img
+              src="/images/interior-minimalist-living.jpg"
+              alt={t(
+                "Bright, minimalist luxury apartment interior in Casablanca managed by Keyvostra Management.",
+              )}
+              fetchPriority="high"
+            />
+            <dl className="mg-hero-stats">
+              <div>
+                <dt>{t("Interlocuteur")}</dt>
+                <dd>{t("Un seul, nommé")}</dd>
               </div>
-            </div>
-            <div className="lg:col-span-6 mt-12 lg:mt-0 relative h-[400px] md:h-[500px]">
-              <img
-                className="absolute inset-0 w-full h-full object-cover rounded-lg shadow-sm"
-                src="/images/interior-minimalist-living.jpg"
-                alt="Bright, minimalist luxury apartment interior in Casablanca managed by Keyvostra Management."
-                fetchPriority="high"
-              />
-            </div>
+              <div>
+                <dt>{t("Reporting")}</dt>
+                <dd>{t("Écrit, mensuel")}</dd>
+              </div>
+              <div>
+                <dt>{t("Astreinte")}</dt>
+                <dd>{t("Urgences 7j/7")}</dd>
+              </div>
+            </dl>
           </div>
         </section>
 
-        {/* Process Bento Grid */}
-        <section id="lifecycle" className="px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto mt-section-padding">
-          <div className="mb-16">
-            <h2 className="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-4">
-              The Management Lifecycle
-            </h2>
-            <p className="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
-              A systematic, transparent approach designed for absolute peace of mind and optimized yield.
+        {/* Lifecycle rail */}
+        <section id="lifecycle" className="mg-lifecycle">
+          <header className="mg-head">
+            <p className="mg-eyebrow">{t("01 — LE CYCLE DE GESTION")}</p>
+            <h2>{t("The Management Lifecycle")}</h2>
+            <p>
+              {t(
+                "A systematic, transparent approach designed for absolute peace of mind and optimized yield.",
+              )}
             </p>
+          </header>
+          <ol className="mg-rail">
+            {lifecycle.map(([number, title, text, tags]) => (
+              <li key={number}>
+                <span className="mg-rail-number">{number}</span>
+                <div>
+                  <h3>{t(title)}</h3>
+                  <p>{t(text)}</p>
+                  <small>{t(tags)}</small>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        {/* Scope matrix */}
+        <section className="mg-scope">
+          <div className="mg-scope-inner">
+            <header className="mg-head mg-head-light">
+              <p className="mg-eyebrow">{t("02 — LE PÉRIMÈTRE, SANS ZONE GRISE")}</p>
+              <h2>{t("Ce qui est inclus. Ce qui ne l’est pas.")}</h2>
+              <p>
+                {t(
+                  "Les mauvaises surprises en gestion viennent presque toujours d’un périmètre flou. Voici le nôtre, avant même de parler d’honoraires.",
+                )}
+              </p>
+            </header>
+            <ul className="mg-matrix">
+              {scope.map(([item, included]) => (
+                <li key={item} className={included ? "is-in" : "is-out"}>
+                  <Icon name={included ? "check_circle" : "receipt_long"} />
+                  <span>{t(item)}</span>
+                  <small>{t(included ? "Inclus" : "Sur devis")}</small>
+                </li>
+              ))}
+            </ul>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-gutter">
-            <div className="md:col-span-8 bg-surface-container-low border border-outline/30 rounded-lg p-8 md:p-12 hover:shadow-[0px_10px_40px_rgba(17,28,68,0.05)] transition-shadow duration-300 group">
-              <div className="flex items-start justify-between mb-8">
-                <div>
-                  <Icon name="campaign" className="text-primary text-4xl mb-4" />
-                  <h3 className="font-headline-md text-headline-md text-on-surface mb-2">Targeted Marketing</h3>
-                </div>
-                <span className="font-display-lg text-display-lg text-outline/10 group-hover:text-primary/10 transition-colors">
-                  01
-                </span>
-              </div>
-              <p className="font-body-md text-body-md text-on-surface-variant">
-                We position your property to attract high-caliber tenants through professional photography, targeted
-                digital campaigns, and exclusive network outreach in the corporate sector.
+        </section>
+
+        {/* Assets managed */}
+        <section className="mg-assets">
+          <header className="mg-head">
+            <p className="mg-eyebrow">{t("03 — CE QUE NOUS GÉRONS")}</p>
+            <h2>{t("Un lot, un immeuble, un portefeuille.")}</h2>
+            <p>
+              {t(
+                "La gestion ne se limite pas à l’appartement loué nu : nous suivons aussi les meublés, les immeubles complets et les surfaces professionnelles.",
+              )}
+            </p>
+          </header>
+          <div className="mg-assets-strip">
+            {assets.map(([image, alt, label]) => (
+              <figure key={label}>
+                <img src={image} loading="lazy" alt={t(alt)} />
+                <figcaption>{t(label)}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </section>
+
+        {/* Reporting cadence */}
+        <section className="mg-reporting">
+          <div className="mg-reporting-inner">
+            <div className="mg-reporting-copy">
+              <p className="mg-eyebrow">{t("04 — CE QUE VOUS RECEVEZ")}</p>
+              <h2>{t("Vous ne demandez jamais de nouvelles.")}</h2>
+              <p>
+                {t(
+                  "Le propriétaire qui doit relancer son gestionnaire a déjà perdu. Le rythme est fixé à l’avance et tenu.",
+                )}
               </p>
+              <WhatsAppButton
+                message={category.whatsappMessage}
+                label="Demander un exemple de reporting"
+                note="Nous vous envoyons un modèle de relevé mensuel anonymisé."
+                tone="management"
+              />
             </div>
-            <div className="md:col-span-4 bg-surface-container border border-outline/30 rounded-lg p-8 hover:shadow-[0px_10px_40px_rgba(17,28,68,0.05)] transition-shadow duration-300">
-              <Icon name="shield_person" className="text-primary text-4xl mb-6" />
-              <h3 className="font-headline-md text-headline-md text-on-surface mb-4">Rigorous Screening</h3>
-              <p className="font-body-md text-body-md text-on-surface-variant">
-                Comprehensive background checks, financial verification, and employment history review to ensure
-                long-term stability and reliability.
-              </p>
-            </div>
-            <div className="md:col-span-4 bg-surface-container border border-outline/30 rounded-lg p-8 hover:shadow-[0px_10px_40px_rgba(17,28,68,0.05)] transition-shadow duration-300">
-              <Icon name="home_repair_service" className="text-primary text-4xl mb-6" />
-              <h3 className="font-headline-md text-headline-md text-on-surface mb-4">Active Maintenance</h3>
-              <p className="font-body-md text-body-md text-on-surface-variant">
-                24/7 proactive and reactive maintenance coordination using our vetted network of premium
-                contractors.
-              </p>
-            </div>
-            <div className="md:col-span-8 bg-primary-fixed border border-primary/20 rounded-lg p-8 md:p-12 hover:shadow-[0px_10px_40px_rgba(17,28,68,0.05)] transition-shadow duration-300 group">
-              <div className="flex items-start justify-between mb-8">
-                <div>
-                  <Icon name="account_balance" className="text-primary text-4xl mb-4" />
-                  <h3 className="font-headline-md text-headline-md text-on-surface mb-2">Transparent Financials</h3>
-                </div>
-                <span className="font-display-lg text-display-lg text-primary/10 group-hover:text-primary/20 transition-colors">
-                  04
-                </span>
-              </div>
-              <p className="font-body-md text-body-md text-on-surface-variant">
-                Real-time access to statements, automated rent collection, and detailed quarterly performance
-                reports to keep you informed without the operational headache.
-              </p>
-            </div>
+            <ul className="mg-reporting-list">
+              {reporting.map(([when, what]) => (
+                <li key={when}>
+                  <strong>{t(when)}</strong>
+                  <p>{t(what)}</p>
+                </li>
+              ))}
+            </ul>
           </div>
         </section>
 
         {/* Guarantees */}
-        <section className="px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto mt-section-padding">
-          <div className="border-t border-outline/30 pt-16">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-              <div>
-                <h2 className="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-6">
-                  The Keyvostra Guarantee
-                </h2>
-                <p className="font-body-lg text-body-lg text-on-surface-variant mb-8">
-                  We align our success with yours. Our management philosophy is built on absolute accountability and
-                  optimized yield protection.
-                </p>
-                <ul className="space-y-6">
-                  <li className="flex items-start gap-4 pb-6 border-b border-outline/30">
-                    <Icon name="check_circle" className="text-primary mt-1" />
-                    <div>
-                      <h4 className="font-label-md text-label-md text-on-surface mb-1">Income Continuity</h4>
-                      <p className="font-body-md text-body-md text-on-surface-variant">
-                        Strategies designed to minimize vacancy periods between tenancies.
-                      </p>
-                    </div>
-                  </li>
-                  <li className="flex items-start gap-4 pb-6 border-b border-outline/30">
-                    <Icon name="check_circle" className="text-primary mt-1" />
-                    <div>
-                      <h4 className="font-label-md text-label-md text-on-surface mb-1">Asset Preservation</h4>
-                      <p className="font-body-md text-body-md text-on-surface-variant">
-                        Regular inspections to maintain property value and prevent costly repairs.
-                      </p>
-                    </div>
-                  </li>
-                  <li className="flex items-start gap-4">
-                    <Icon name="check_circle" className="text-primary mt-1" />
-                    <div>
-                      <h4 className="font-label-md text-label-md text-on-surface mb-1">Legal Compliance</h4>
-                      <p className="font-body-md text-body-md text-on-surface-variant">
-                        Strict adherence to local real estate regulations and robust lease structuring.
-                      </p>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              <div className="relative h-[400px] md:h-[600px] hidden md:block">
-                <img
-                  className="absolute inset-0 w-full h-full object-cover rounded-lg shadow-sm"
-                  loading="lazy"
-                  src="/images/facade-glass-steel.jpg"
-                  alt="Close-up of a modern glass and steel building facade in Casablanca, reflecting Keyvostra Management's asset preservation standards."
-                />
-              </div>
-            </div>
+        <section className="mg-guarantee">
+          <div className="mg-guarantee-copy">
+            <p className="mg-eyebrow">{t("05 — NOS ENGAGEMENTS")}</p>
+            <h2>{t("The Keyvostra Guarantee")}</h2>
+            <p>
+              {t(
+                "We align our success with yours. Our management philosophy is built on absolute accountability and optimized yield protection.",
+              )}
+            </p>
+            <ul>
+              {[
+                [
+                  "Income Continuity",
+                  "Strategies designed to minimize vacancy periods between tenancies.",
+                ],
+                [
+                  "Asset Preservation",
+                  "Regular inspections to maintain property value and prevent costly repairs.",
+                ],
+                [
+                  "Legal Compliance",
+                  "Strict adherence to local real estate regulations and robust lease structuring.",
+                ],
+              ].map(([title, text]) => (
+                <li key={title}>
+                  <Icon name="check_circle" />
+                  <div>
+                    <h4>{t(title)}</h4>
+                    <p>{t(text)}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+            <Link className="mg-text-link" to="/maintenance">
+              {t("Voir aussi la maintenance technique")}
+              <Icon name="arrow_outward" />
+            </Link>
           </div>
+          <img
+            src="/images/facade-glass-steel.jpg"
+            loading="lazy"
+            alt={t(
+              "Close-up of a modern glass and steel building facade in Casablanca, reflecting Keyvostra Management's asset preservation standards.",
+            )}
+          />
         </section>
+
+        <ServiceInquiry category={category} />
       </div>
     </>
   );

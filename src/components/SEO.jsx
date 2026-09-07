@@ -1,3 +1,4 @@
+import { useTranslation } from "../i18n";
 import { Helmet } from "react-helmet-async";
 
 const SITE_URL = "https://www.keyvostragroup.com";
@@ -14,16 +15,15 @@ export default function SEO({
   path = "/",
   image = DEFAULT_IMAGE,
 }) {
+  const { language } = useTranslation();
   const url = `${SITE_URL}${path}`;
 
   return (
     <Helmet>
-      <html
-        lang={
-          path === "/" || path === "/contact" || path.startsWith("/portfolio")
-            ? "fr"
-            : "en"
-        }
+      <html lang={language} dir={language === "ar" ? "rtl" : "ltr"} />
+      <meta
+        property="og:locale"
+        content={{ fr: "fr_FR", en: "en_GB", ar: "ar_MA" }[language]}
       />
       <title>{title}</title>
       <meta name="description" content={description} />

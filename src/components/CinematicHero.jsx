@@ -1,7 +1,9 @@
+import { useTranslation } from "../i18n";
 import { useEffect, useRef, useState } from "react";
 import Icon from "./Icon";
 
 export default function CinematicHero() {
+  const { t } = useTranslation();
   const video = useRef(null);
   const [playing, setPlaying] = useState(false);
   const pausedByUser = useRef(false);
@@ -60,57 +62,59 @@ export default function CinematicHero() {
       <div className="cinematic-shade" />
       <div className="cinematic-content">
         <p className="cinematic-kicker">
-          <span className="status-dot" /> L’IMMOBILIER, DANS TOUTES SES
-          DIMENSIONS.
+          <span className="status-dot" />{" "}
+          {t("L’IMMOBILIER, DANS TOUTES SES DIMENSIONS.")}
         </p>
         <h1
           id="hero-title"
           className="cinematic-wordmark"
-          aria-label="Keyvostra Group"
+          aria-label={t("Keyvostra Group")}
         >
           {"KEYVOSTRA".split("").map((letter, i) => (
             <span aria-hidden="true" style={{ "--letter": i }} key={i}>
-              {letter}
+              {t(letter)}
             </span>
           ))}
           <span className="brand-period" aria-hidden="true">
             .
           </span>
         </h1>
-        <div className="cinematic-group">G R O U P</div>
+        <div className="cinematic-group">{t("G R O U P")}</div>
         <a className="hero-countries" href="#international">
-          <span>MA · MAROC</span>
+          <span>{t("MA · MAROC")}</span>
           <span aria-hidden="true">↔</span>
-          <span>UK · UNITED KINGDOM</span>
+          <span>{t("UK · UNITED KINGDOM")}</span>
           <Icon name="arrow_outward" />
         </a>
         <p className="cinematic-description">
-          Votre patrimoine. Une vision d’ensemble.
+          {t("Votre patrimoine. Une vision d’ensemble.")}
           <br />
-          <span>Votre partenaire immobilier au Maroc et au Royaume-Uni.</span>
+          <span>
+            {t("Votre partenaire immobilier au Maroc et au Royaume-Uni.")}
+          </span>
         </p>
         <div className="hero-actions">
           <a className="kv-button" href="#contact">
-            Parlons de votre projet <Icon name="arrow_outward" />
+            {t("Parlons de votre projet")} <Icon name="arrow_outward" />
           </a>
           <a className="cinematic-secondary" href="#expertises">
-            Découvrir nos expertises <Icon name="south" />
+            {t("Découvrir nos expertises")} <Icon name="south" />
           </a>
         </div>
       </div>
       <div className="cinematic-bottom">
         <span>
-          <Icon name="location_on" /> MAROC · UNITED KINGDOM
+          <Icon name="location_on" /> {t("MAROC · UNITED KINGDOM")}
         </span>
         <a href="#approche" className="scroll-invitation">
-          FAITES DÉFILER <Icon name="south" />
+          {t("FAITES DÉFILER")} <Icon name="south" />
         </a>
         <button
           type="button"
           onClick={toggle}
-          aria-label={
-            playing ? "Mettre le fond vidéo en pause" : "Lire le fond vidéo"
-          }
+          aria-label={t(
+            playing ? "Mettre le fond vidéo en pause" : "Lire le fond vidéo",
+          )}
         >
           <Icon name={playing ? "pause" : "play_arrow"} />
         </button>

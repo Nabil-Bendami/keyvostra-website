@@ -1,6 +1,8 @@
+import { useTranslation } from "../i18n";
 import { Link } from "react-router-dom";
 import InternationalPresence from "../components/InternationalPresence";
 import UKContact from "../components/UKContact";
+import ContactChannels from "../components/ContactChannels";
 import SEO from "../components/SEO";
 import Icon from "../components/Icon";
 import ContactForm from "../components/ContactForm";
@@ -8,15 +10,16 @@ import FounderShowcase from "../components/FounderShowcase";
 import TestimonialCarousel from "../components/TestimonialCarousel";
 import CinematicHero from "../components/CinematicHero";
 import MotionReveal from "../components/MotionReveal";
+import InvestPreview from "../components/InvestPreview";
 import RealizationsCarousel from "../components/RealizationsCarousel";
-import { site, testimonials } from "../data/siteData";
+import { contactChannels, testimonials } from "../data/siteData";
 
 const services = [
   {
     name: "Invest",
     icon: "trending_up",
-    line: "Investir avec une vision.",
-    text: "Études de faisabilité, sélection d’opportunités et conseil stratégique pour donner du sens à chaque investissement.",
+    line: "Votre investissement, de A à Z.",
+    text: "De l’étude au suivi du projet : nous vous accompagnons dans l’investissement, les démarches juridiques et l’élaboration de votre business plan.",
     tags: "ANALYSER · IDENTIFIER · INVESTIR",
     to: "/invest",
   },
@@ -54,19 +57,23 @@ const services = [
   },
 ];
 export default function Home() {
+  const { t } = useTranslation();
   return (
     <MotionReveal>
       <SEO
-        title="Keyvostra Group — Votre patrimoine, notre engagement"
-        description="Keyvostra Group accompagne vos projets immobiliers au Maroc et au Royaume-Uni : investissement, gestion et maintenance."
+        title={t("Keyvostra Group — Votre patrimoine, notre engagement")}
+        description={t(
+          "Keyvostra Group accompagne vos projets immobiliers au Maroc et au Royaume-Uni : investissement, gestion et maintenance.",
+        )}
         path="/"
       />
       <CinematicHero />
       <div className="expertise-strip">
-        <span>UN ACCOMPAGNEMENT COMPLET</span>
+        <span>{t("UN ACCOMPAGNEMENT COMPLET")}</span>
         {services.map((s, i) => (
           <a href="#expertises" key={s.name}>
-            <small>0{i + 1}</small> Keyvostra <strong>{s.name}</strong>
+            <small>0{t(i + 1)}</small> {t("Keyvostra")}{" "}
+            <strong>{t(s.name)}</strong>
             <Icon name="arrow_outward" />
           </a>
         ))}
@@ -78,36 +85,35 @@ export default function Home() {
       >
         <FounderShowcase />
         <div className="founder-copy">
-          <p className="eyebrow">01 — LE GROUPE</p>
+          <p className="eyebrow">{t("01 — LE GROUPE")}</p>
           <h2>
-            Avant la pierre,
+            {t("Avant la pierre,")}
             <br />
-            il y a <em>la confiance.</em>
+            {t("il y a")} <em>{t("la confiance.")}</em>
           </h2>
           <p>
-            Un projet immobilier est avant tout un projet de vie. Avec Keyvostra
-            Group, Achraf Aitoukrim porte une ambition claire : réunir les
-            expertises dont votre patrimoine a besoin, autour d’une relation
-            humaine et durable.
+            {t(
+              "Un projet immobilier est avant tout un projet de vie. Avec Keyvostra Group, Achraf Aitoukrim porte une ambition claire : réunir les expertises dont votre patrimoine a besoin, autour d’une relation humaine et durable.",
+            )}
           </p>
           <p>
-            Depuis Sidi Maarouf à Casablanca et avec Abdelmounaim Sraitah au
-            Royaume-Uni, nous accompagnons investisseurs et propriétaires dans
-            les deux pays, avec un suivi à chaque étape.
+            {t(
+              "Depuis Sidi Maarouf à Casablanca et avec Abdelmounaim Sraitah au Royaume-Uni, nous accompagnons investisseurs et propriétaires dans les deux pays, avec un suivi à chaque étape.",
+            )}
           </p>
           <div className="founder-values">
             <span>
-              <Icon name="verified_user" /> Transparence
+              <Icon name="verified_user" /> {t("Transparence")}
             </span>
             <span>
-              <Icon name="handshake" /> Proximité
+              <Icon name="handshake" /> {t("Proximité")}
             </span>
             <span>
-              <Icon name="architecture" /> Exigence
+              <Icon name="architecture" /> {t("Exigence")}
             </span>
           </div>
           <Link className="text-link" to="/about">
-            Rencontrer Keyvostra <Icon name="arrow_outward" />
+            {t("Rencontrer Keyvostra")} <Icon name="arrow_outward" />
           </Link>
         </div>
       </section>
@@ -118,17 +124,17 @@ export default function Home() {
         <div className="kv-section">
           <div className="section-heading">
             <div>
-              <p className="eyebrow">02 — NOS EXPERTISES</p>
+              <p className="eyebrow">{t("02 — NOS EXPERTISES")}</p>
               <h2>
-                Cinq expertises.
+                {t("Cinq expertises.")}
                 <br />
-                <em>Une même exigence.</em>
+                <em>{t("Une même exigence.")}</em>
               </h2>
             </div>
             <p>
-              De la première opportunité à l’entretien quotidien,
+              {t("De la première opportunité à l’entretien quotidien,")}
               <br />
-              nous pensons votre immobilier dans sa globalité.
+              {t("nous pensons votre immobilier dans sa globalité.")}
             </p>
           </div>
           <div className="services-grid">
@@ -136,14 +142,14 @@ export default function Home() {
               <Link className="expertise-card" to={s.to} key={s.name}>
                 <div className="card-top">
                   <Icon name={s.icon} />
-                  <span>0{i + 1}</span>
+                  <span>0{t(i + 1)}</span>
                 </div>
-                <p className="service-brand">KEYVOSTRA</p>
-                <h3>{s.name}</h3>
-                <h4>{s.line}</h4>
-                <p>{s.text}</p>
+                <p className="service-brand">{t("KEYVOSTRA")}</p>
+                <h3>{t(s.name)}</h3>
+                <h4>{t(s.line)}</h4>
+                <p>{t(s.text)}</p>
                 <div className="service-bottom">
-                  <span>{s.tags}</span>
+                  <span>{t(s.tags)}</span>
                   <Icon name="arrow_outward" />
                 </div>
               </Link>
@@ -152,15 +158,16 @@ export default function Home() {
         </div>
       </section>
 
+      <InvestPreview />
       <RealizationsCarousel />
 
       <section className="trust-section">
         <div className="kv-section">
-          <p className="eyebrow">04 — UNE RELATION DURABLE</p>
+          <p className="eyebrow">{t("04 — UNE RELATION DURABLE")}</p>
           <h2>
-            Votre confiance.
+            {t("Votre confiance.")}
             <br />
-            <em>Notre premier engagement.</em>
+            <em>{t("Notre premier engagement.")}</em>
           </h2>
           {testimonials.length ? (
             <TestimonialCarousel testimonials={testimonials} />
@@ -168,26 +175,29 @@ export default function Home() {
             <div className="trust-promises">
               <div>
                 <span>01</span>
-                <h3>Un interlocuteur dédié</h3>
+                <h3>{t("Un interlocuteur dédié")}</h3>
                 <p>
-                  Un échange direct pour comprendre votre projet et suivre son
-                  évolution.
+                  {t(
+                    "Un échange direct pour comprendre votre projet et suivre son évolution.",
+                  )}
                 </p>
               </div>
               <div>
                 <span>02</span>
-                <h3>Une vision transparente</h3>
+                <h3>{t("Une vision transparente")}</h3>
                 <p>
-                  Des étapes claires et des informations utiles pour décider en
-                  confiance.
+                  {t(
+                    "Des étapes claires et des informations utiles pour décider en confiance.",
+                  )}
                 </p>
               </div>
               <div>
                 <span>03</span>
-                <h3>Un suivi dans la durée</h3>
+                <h3>{t("Un suivi dans la durée")}</h3>
                 <p>
-                  Une attention portée à votre patrimoine, bien au-delà de la
-                  transaction.
+                  {t(
+                    "Une attention portée à votre patrimoine, bien au-delà de la transaction.",
+                  )}
                 </p>
               </div>
             </div>
@@ -197,49 +207,29 @@ export default function Home() {
 
       <section className="kv-section contact-section" id="contact">
         <div>
-          <p className="eyebrow">05 — CONSTRUISONS LA SUITE</p>
+          <p className="eyebrow">{t("05 — CONSTRUISONS LA SUITE")}</p>
           <h2>
-            Votre prochain projet
+            {t("Votre prochain projet")}
             <br />
-            commence par
+            {t("commence par")}
             <br />
-            <em>une conversation.</em>
+            <em>{t("une conversation.")}</em>
           </h2>
           <p>
-            Un investissement en vue ? Un bien à gérer ou à entretenir ? Parlons
-            de vos besoins.
+            {t(
+              "Un investissement en vue ? Un bien à gérer ou à entretenir ? Parlons de vos besoins.",
+            )}
           </p>
-          <a className="contact-email" href={`mailto:${site.contact.email}`}>
-            {site.contact.email}
-            <Icon name="arrow_outward" />
-          </a>
-          <div className="contact-phones">
-            {site.contact.phones.map((phone) => (
-              <a href={phone.href} key={phone.href}>
-                <Icon name="call" />
-                {phone.label}
-              </a>
-            ))}
-          </div>
-          <div className="address-block">
-            <Icon name="location_on" />
-            <div>
-              <strong>Sidi Maarouf</strong>
-              <p>Casablanca, Maroc</p>
-              <a
-                href="https://www.google.com/maps/search/?api=1&query=Sidi+Maarouf+Casablanca"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Voir le quartier sur la carte ↗
-              </a>
-            </div>
-          </div>
+          <ContactChannels
+            heading="Nous joindre · Maroc"
+            channels={contactChannels}
+            className="contact-page-channels"
+          />
           <UKContact />
         </div>
         <div className="home-form">
-          <h3>Parlez-nous de votre projet</h3>
-          <p>Quelques mots pour faire le premier pas.</p>
+          <h3>{t("Parlez-nous de votre projet")}</h3>
+          <p>{t("Quelques mots pour faire le premier pas.")}</p>
           <ContactForm />
         </div>
       </section>

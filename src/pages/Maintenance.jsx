@@ -1,104 +1,270 @@
+import { useTranslation } from "../i18n";
 import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
 import Icon from "../components/Icon";
+import WhatsAppButton from "../components/WhatsAppButton";
+import ServiceInquiry from "../components/ServiceInquiry";
+import { serviceByPath } from "../data/services";
+import "../styles/maintenance.css";
+
+const category = serviceByPath["/maintenance"];
+
+// The trade catalogue: a visitor should find their own problem in this list.
+const trades = [
+  [
+    "MT-01",
+    "bolt",
+    "Électricité & courants faibles",
+    "Tableau, mise aux normes, éclairage, interphone, domotique et remise en service après coupure.",
+  ],
+  [
+    "MT-02",
+    "water_drop",
+    "Plomberie & sanitaire",
+    "Fuites, canalisations, chauffe-eau, robinetterie, pompes et recherche d’infiltration.",
+  ],
+  [
+    "MT-03",
+    "mode_fan",
+    "Climatisation & ventilation",
+    "Entretien saisonnier des splits et gainables, recharge, filtres, VMC et désembouage.",
+  ],
+  [
+    "MT-04",
+    "format_paint",
+    "Peinture & finitions",
+    "Reprises après dégât, enduits, laque, boiseries et remise en état entre deux locataires.",
+  ],
+  [
+    "MT-05",
+    "carpenter",
+    "Menuiserie & serrurerie",
+    "Portes, placards, volets, vitrages, serrures et remplacement de cylindres après départ.",
+  ],
+  [
+    "MT-06",
+    "pool",
+    "Piscine & espaces verts",
+    "Traitement de l’eau, filtration, hivernage, taille, arrosage automatique et entretien courant.",
+  ],
+  [
+    "MT-07",
+    "security",
+    "Sécurité & accès",
+    "Caméras, alarmes, contrôle d’accès, portails motorisés et vérification périodique.",
+  ],
+  [
+    "MT-08",
+    "cleaning_services",
+    "Nettoyage & remise en état",
+    "Nettoyage fin de chantier, remise en état avant visite et entretien profond des surfaces nobles.",
+  ],
+];
+
+const priorities = [
+  [
+    "URGENCE",
+    "Sous 24 h",
+    "Fuite active, panne électrique totale, porte ou serrure hors service, dégât des eaux.",
+    "Passage sécurisé d’abord, réparation définitive ensuite.",
+  ],
+  [
+    "STANDARD",
+    "Sous 72 h",
+    "Panne d’équipement, désordre gênant mais non dangereux, petite réparation.",
+    "Devis envoyé avant intervention.",
+  ],
+  [
+    "PLANIFIÉ",
+    "Date convenue",
+    "Entretien saisonnier, rénovation, remise en état entre deux locataires.",
+    "Planning et intervenants annoncés à l’avance.",
+  ],
+];
+
+const formulas = [
+  [
+    "Intervention ponctuelle",
+    "Un problème, une intervention. Diagnostic, devis, réparation et photo de fin de chantier.",
+    ["Devis avant travaux", "Pièces et main-d’œuvre détaillées", "Compte rendu photo"],
+  ],
+  [
+    "Contrat annuel",
+    "Un programme d’entretien préventif sur l’année, avec passages planifiés et priorité en cas d’urgence.",
+    ["Visites périodiques programmées", "Astreinte urgences", "Rapport annuel de l’état du bien"],
+  ],
+  [
+    "Remise en état locative",
+    "Le bien est repris entre deux locataires : réparations, peinture, nettoyage, prêt pour les visites.",
+    ["Chiffrage global", "Un seul chantier coordonné", "Livraison avant la relocation"],
+  ],
+];
 
 export default function Maintenance() {
+  const { t } = useTranslation();
   return (
     <>
       <SEO
-        title="Keyvostra Maintenance - Premium Property Care in Casablanca"
-        description="Preventive and reactive maintenance for premium Casablanca properties: electrical & HVAC, plumbing integrity, and restorative finishing that protects your investment."
+        title={t("Keyvostra Maintenance - Premium Property Care in Casablanca")}
+        description={t(
+          "Preventive and reactive maintenance for premium Casablanca properties: electrical & HVAC, plumbing integrity, and restorative finishing that protects your investment.",
+        )}
         path="/maintenance"
       />
 
-      <div className="pt-[100px]">
-        {/* Hero */}
-        <section className="px-margin-mobile md:px-margin-desktop py-section-padding max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-2 gap-gutter items-center">
-          <div>
-            <h1 className="font-display-lg text-headline-lg-mobile md:text-display-lg text-on-background mb-6">
-              Impeccable Maintenance for Premium Assets.
-            </h1>
-            <p className="font-body-lg text-body-lg text-on-surface-variant mb-8">
-              Protecting your real estate investments with rigorous preventive maintenance and rapid technical
-              repair services in Casablanca. We ensure your properties maintain their luxury standard.
+      <div className="mt-page">
+        {/* Hero — work order header */}
+        <section className="mt-hero">
+          <div className="mt-hero-sheet">
+            <p className="mt-ref">
+              <span>{t("KEYVOSTRA MAINTENANCE")}</span>
+              <span>{t("CASABLANCA · 7J/7 EN URGENCE")}</span>
             </p>
-            <div className="flex flex-wrap gap-4">
-              <Link
-                to="/contact"
-                className="bg-primary text-on-primary px-8 py-4 font-label-md text-label-md rounded hover:bg-primary-container transition-colors"
-              >
-                Book a Consultation
-              </Link>
-              <a
-                href="#services"
-                className="border border-outline text-on-surface px-8 py-4 font-label-md text-label-md rounded hover:bg-surface-variant transition-colors"
-              >
-                Explore Services
+            <h1>{t("Impeccable Maintenance for Premium Assets.")}</h1>
+            <p className="mt-lead">
+              {t(
+                "Protecting your real estate investments with rigorous preventive maintenance and rapid technical repair services in Casablanca. We ensure your properties maintain their luxury standard.",
+              )}
+            </p>
+            <div className="mt-hero-actions">
+              <a href="#demande" className="kv-button mt-button">
+                {t("Book a Consultation")}
+                <Icon name="arrow_outward" />
+              </a>
+              <a href="#catalogue" className="mt-ghost-link">
+                {t("Explore Services")}
+                <Icon name="south" />
               </a>
             </div>
+            <WhatsAppButton
+              message={category.whatsappMessage}
+              label="Signaler une urgence"
+              note="Fuite, panne, dégât des eaux : une photo sur WhatsApp suffit pour démarrer."
+              tone="maintenance"
+              className="mt-hero-wa"
+            />
           </div>
-          <div className="relative h-[400px] md:h-[600px] rounded-lg overflow-hidden">
+          <figure className="mt-hero-visual">
             <img
-              className="absolute inset-0 w-full h-full object-cover"
               src="/images/interior-minimalist-living.jpg"
-              alt="Pristine, well-maintained luxury interior in a Casablanca villa, kept to Keyvostra Maintenance's preventive care standard."
+              alt={t(
+                "Pristine, well-maintained luxury interior in a Casablanca villa, kept to Keyvostra Maintenance's preventive care standard.",
+              )}
               fetchPriority="high"
             />
+          </figure>
+        </section>
+
+        {/* Trade catalogue */}
+        <section id="catalogue" className="mt-catalogue">
+          <header className="mt-head">
+            <p className="mt-eyebrow">{t("01 — CATALOGUE D’INTERVENTIONS")}</p>
+            <h2>{t("Comprehensive Technical Solutions")}</h2>
+            <p>
+              {t(
+                "Huit familles de métiers, des intervenants vérifiés, un seul numéro à composer. Vous ne cherchez plus l’artisan : nous le pilotons.",
+              )}
+            </p>
+          </header>
+          <ul className="mt-trades">
+            {trades.map(([code, icon, title, text]) => (
+              <li key={code}>
+                <span className="mt-code">{code}</span>
+                <Icon name={icon} />
+                <div>
+                  <h3>{t(title)}</h3>
+                  <p>{t(text)}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        {/* Response commitments */}
+        <section className="mt-priorities">
+          <header className="mt-head mt-head-invert">
+            <p className="mt-eyebrow">{t("02 — DÉLAIS D’INTERVENTION")}</p>
+            <h2>{t("Trois niveaux. Trois délais annoncés.")}</h2>
+            <p>
+              {t(
+                "Une demande est classée dès sa réception. Vous savez tout de suite dans quelle case elle tombe, et quand quelqu’un se déplace.",
+              )}
+            </p>
+          </header>
+          <div className="mt-priority-grid">
+            {priorities.map(([level, delay, scope, note]) => (
+              <article key={level} className={`mt-priority mt-priority-${level.toLowerCase().replace(/[^a-z]/g, "")}`}>
+                <p className="mt-priority-level">{t(level)}</p>
+                <p className="mt-priority-delay">{t(delay)}</p>
+                <p className="mt-priority-scope">{t(scope)}</p>
+                <p className="mt-priority-note">
+                  <Icon name="bolt" />
+                  {t(note)}
+                </p>
+              </article>
+            ))}
           </div>
         </section>
 
-        {/* Services Details Bento */}
-        <section id="services" className="bg-surface-container-low px-margin-mobile md:px-margin-desktop py-section-padding">
-          <div className="max-w-container-max mx-auto">
-            <h2 className="font-headline-lg text-headline-lg mb-12 text-center">Comprehensive Technical Solutions</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[300px]">
-              <div className="md:col-span-2 bg-surface rounded-xl p-8 border border-outline/30 flex flex-col justify-between hover:shadow-[0px_10px_40px_rgba(17,28,68,0.05)] transition-shadow">
-                <div>
-                  <Icon name="home_repair_service" className="text-primary text-4xl mb-4" />
-                  <h3 className="font-headline-md text-headline-md mb-2">Preventive Management</h3>
-                  <p className="font-body-md text-body-md text-on-surface-variant">
-                    Scheduled structural and system checks to mitigate risks before they occur, preserving the
-                    architectural integrity of high-end assets.
-                  </p>
-                </div>
-              </div>
-              <div className="bg-surface rounded-xl p-8 border border-outline/30 flex flex-col justify-between hover:shadow-[0px_10px_40px_rgba(17,28,68,0.05)] transition-shadow">
-                <div>
-                  <Icon name="bolt" className="text-primary text-4xl mb-4" />
-                  <h3 className="font-headline-md text-headline-md mb-2">Electrical &amp; HVAC</h3>
-                  <p className="font-body-md text-body-md text-on-surface-variant">
-                    Expert servicing of climate control and power systems tailored for luxury estates.
-                  </p>
-                </div>
-              </div>
-              <div className="bg-surface rounded-xl p-8 border border-outline/30 flex flex-col justify-between hover:shadow-[0px_10px_40px_rgba(17,28,68,0.05)] transition-shadow">
-                <div>
-                  <Icon name="water_drop" className="text-primary text-4xl mb-4" />
-                  <h3 className="font-headline-md text-headline-md mb-2">Plumbing Integrity</h3>
-                  <p className="font-body-md text-body-md text-on-surface-variant">
-                    Rapid response and routine maintenance for complex water systems.
-                  </p>
-                </div>
-              </div>
-              <div className="md:col-span-2 relative rounded-xl overflow-hidden group">
-                <img
-                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                  loading="lazy"
-                  src="/images/marble-lobby.jpg"
-                  alt="Pristine marble finishes in a Casablanca property after restorative maintenance work by Keyvostra Maintenance."
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-on-background/80 to-transparent" />
-                <div className="absolute bottom-8 left-8">
-                  <h3 className="font-headline-md text-headline-md text-on-primary mb-2">Restorative Finishing</h3>
-                  <p className="font-body-md text-body-md text-on-primary/80 max-w-md">
-                    Detail-oriented aesthetic repairs ensuring properties look as pristine as the day they were
-                    built.
-                  </p>
-                </div>
-              </div>
-            </div>
+        {/* Formulas */}
+        <section className="mt-formulas">
+          <header className="mt-head">
+            <p className="mt-eyebrow">{t("03 — TROIS FAÇONS DE TRAVAILLER")}</p>
+            <h2>{t("Ponctuel, annuel, ou remise en état.")}</h2>
+            <p>
+              {t(
+                "Vous n’avez pas besoin d’un contrat pour nous appeler une fois. Et si le bien demande un suivi, la formule annuelle coûte moins cher qu’une panne ignorée.",
+              )}
+            </p>
+          </header>
+          <div className="mt-formula-grid">
+            {formulas.map(([title, text, items]) => (
+              <article key={title}>
+                <h3>{t(title)}</h3>
+                <p>{t(text)}</p>
+                <ul>
+                  {items.map((item) => (
+                    <li key={item}>
+                      <Icon name="check" />
+                      {t(item)}
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            ))}
           </div>
         </section>
+
+        {/* Finishing band */}
+        <section className="mt-finishing">
+          <img
+            src="/images/marble-lobby.jpg"
+            loading="lazy"
+            alt={t(
+              "Pristine marble finishes in a Casablanca property after restorative maintenance work by Keyvostra Maintenance.",
+            )}
+          />
+          <div className="mt-finishing-copy">
+            <p className="mt-eyebrow">{t("04 — FINITIONS")}</p>
+            <h2>{t("Restorative Finishing")}</h2>
+            <p>
+              {t(
+                "Detail-oriented aesthetic repairs ensuring properties look as pristine as the day they were built.",
+              )}
+            </p>
+            <p className="mt-finishing-note">
+              {t(
+                "Marbre, bois, laiton, béton ciré : les surfaces nobles ne se nettoient pas comme le reste. Nous adaptons produits et gestes à chaque matériau.",
+              )}
+            </p>
+            <Link className="mt-text-link" to="/management">
+              {t("Voir aussi la gestion locative")}
+              <Icon name="arrow_outward" />
+            </Link>
+          </div>
+        </section>
+
+        <ServiceInquiry category={category} />
       </div>
     </>
   );

@@ -24,6 +24,11 @@ export const site = {
     ],
     email: "contact@keyvostra.com",
     address: "Sidi Maarouf, Casablanca, Morocco",
+    // The line that also carries WhatsApp. `number` is the wa.me form.
+    whatsapp: {
+      number: "212777884649",
+      label: "+212 777 884 649",
+    },
   },
   social: {
     whatsapp: "#",
@@ -31,6 +36,74 @@ export const site = {
     share: "#",
   },
 };
+
+/** wa.me deep link carrying a pre-written first message. */
+export const whatsappLink = (message) =>
+  `https://wa.me/${site.contact.whatsapp.number}` +
+  (message ? `?text=${encodeURIComponent(message)}` : "");
+
+// Reachability, as an ordered list: icon tile, value, and the line under it
+// that says what this channel is actually for.
+export const contactChannels = [
+  {
+    key: "phone-main",
+    icon: "call",
+    value: site.contact.phones[0].label,
+    href: site.contact.phones[0].href,
+    note: "Ligne principale",
+    dir: "ltr",
+  },
+  {
+    key: "whatsapp",
+    icon: "whatsapp",
+    value: site.contact.whatsapp.label,
+    href: null,
+    note: "WhatsApp · réponse dans la journée",
+    dir: "ltr",
+  },
+  {
+    key: "email",
+    icon: "mail",
+    value: site.contact.email,
+    href: `mailto:${site.contact.email}`,
+    note: "Réponse sous 24 h ouvrées",
+    dir: "ltr",
+  },
+  {
+    key: "address",
+    icon: "location_on",
+    value: "Sidi Maarouf, Casablanca",
+    href: "https://www.google.com/maps/search/?api=1&query=Sidi+Maarouf+Casablanca",
+    external: true,
+    note: "Rendez-vous sur place, sur convocation",
+  },
+  {
+    key: "hours",
+    icon: "schedule",
+    value: "Du lundi au samedi, 9h — 19h",
+    href: null,
+    note: "Urgences maintenance : 7j/7 par WhatsApp",
+  },
+];
+
+export const ukChannels = [
+  {
+    key: "uk-phone",
+    icon: "call",
+    value: site.uk.phone,
+    href: site.uk.phoneHref,
+    note: site.uk.name,
+    dir: "ltr",
+  },
+  {
+    key: "uk-email",
+    icon: "mail",
+    value: site.uk.email,
+    href: `mailto:${site.uk.email}`,
+    note: "Royaume-Uni · Développement commercial",
+    dir: "ltr",
+  },
+];
 
 export const navLinks = [
   { label: "Home", to: "/" },

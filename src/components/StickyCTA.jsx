@@ -1,3 +1,4 @@
+import { useTranslation } from "../i18n";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Icon from "./Icon";
@@ -8,6 +9,7 @@ import Icon from "./Icon";
  * the fixed navbar, so this stays hidden at md+ to avoid a redundant CTA.
  */
 export default function StickyCTA() {
+  const { t } = useTranslation();
   const [visible, setVisible] = useState(false);
   const location = useLocation();
 
@@ -30,7 +32,7 @@ export default function StickyCTA() {
         to="/#contact"
         className="w-full bg-primary text-on-primary font-label-md text-label-md px-6 py-4 rounded flex items-center justify-center gap-2"
       >
-        Réserver une consultation
+        {t("Réserver une consultation")}
         <Icon name="arrow_forward" className="text-[18px]" />
       </Link>
     </div>

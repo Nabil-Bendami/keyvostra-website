@@ -1,8 +1,10 @@
+import { useTranslation } from "../i18n";
 import { Link } from "react-router-dom";
 import Icon from "./Icon";
 import { site } from "../data/siteData";
 
 export default function InternationalPresence() {
+  const { t } = useTranslation();
   const uk = site.uk;
   return (
     <section
@@ -12,77 +14,79 @@ export default function InternationalPresence() {
     >
       <div className="international-layout">
         <div className="international-copy">
-          <p className="eyebrow">KEYVOSTRA · MOROCCO & UNITED KINGDOM</p>
+          <p className="eyebrow">{t("KEYVOSTRA · MOROCCO & UNITED KINGDOM")}</p>
           <h2 id="international-title">
-            Deux pays.
+            {t("Deux pays.")}
             <br />
-            <em>La même proximité.</em>
+            <em>{t("La même proximité.")}</em>
           </h2>
           <p>
-            Keyvostra vous accompagne au Maroc et au Royaume-Uni. Une présence
-            dans les deux pays, pour échanger sur vos projets immobiliers avec
-            un interlocuteur proche de vous.
+            {t(
+              "Keyvostra vous accompagne au Maroc et au Royaume-Uni. Une présence dans les deux pays, pour échanger sur vos projets immobiliers avec un interlocuteur proche de vous.",
+            )}
           </p>
           <div className="international-markets">
             <div>
-              <span className="country-code">MA</span>
+              <span className="country-code">{t("MA")}</span>
               <div>
-                <strong>Maroc</strong>
-                <small>Sidi Maarouf, Casablanca</small>
+                <strong>{t("Maroc")}</strong>
+                <small>{t("Sidi Maarouf, Casablanca")}</small>
               </div>
             </div>
             <span className="market-connection" aria-hidden="true">
               ↔
             </span>
             <div>
-              <span className="country-code">UK</span>
+              <span className="country-code">{t("UK")}</span>
               <div>
-                <strong>United Kingdom</strong>
-                <small>Royaume-Uni</small>
+                <strong>{t("United Kingdom")}</strong>
+                <small>{t("Royaume-Uni")}</small>
               </div>
             </div>
           </div>
           <Link className="text-link" to="/#contact">
-            Présentez-nous votre projet <Icon name="arrow_outward" />
+            {t("Présentez-nous votre projet")} <Icon name="arrow_outward" />
           </Link>
         </div>
         <article className="uk-founder-card">
           <div className="uk-card-top">
-            <span>VOTRE INTERLOCUTEUR AU ROYAUME-UNI</span>
-            <span className="country-code">UK</span>
+            <span>{t("VOTRE INTERLOCUTEUR AU ROYAUME-UNI")}</span>
+            <span className="country-code">{t("UK")}</span>
           </div>
           <span className="uk-monogram" aria-hidden="true">
-            AS
+            {t("AS")}
             <span />
           </span>
-          <p className="uk-founder-role">COFONDATEUR · KEYVOSTRA GROUP</p>
-          <h3>{uk.name}</h3>
+          <p className="uk-founder-role">
+            {t("COFONDATEUR · KEYVOSTRA GROUP")}
+          </p>
+          <h3>{t(uk.name)}</h3>
           <p className="uk-founder-job">
-            Business Development Associate
+            {t("Business Development Associate")}
             <br />
-            <span>Independent Contractor</span>
+            <span>{t("Independent Contractor")}</span>
           </p>
           <div className="uk-founder-links">
             <a href={uk.phoneHref}>
               <Icon name="call" />
               <span>
-                <small>TÉLÉPHONE UK</small>
-                {uk.phone}
+                <small>{t("TÉLÉPHONE UK")}</small>
+                {t(uk.phone)}
               </span>
               <Icon name="arrow_outward" />
             </a>
             <a href={`mailto:${uk.email}`}>
               <Icon name="mail" />
               <span>
-                <small>EMAIL</small>
-                {uk.email}
+                <small>{t("EMAIL")}</small>
+                {t(uk.email)}
               </span>
               <Icon name="arrow_outward" />
             </a>
           </div>
           <p className="uk-founder-location">
             <Icon name="location_on" />
-            United Kingdom (UK)
+            {t("United Kingdom (UK)")}
           </p>
         </article>
       </div>

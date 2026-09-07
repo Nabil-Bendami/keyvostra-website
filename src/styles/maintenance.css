@@ -1,0 +1,379 @@
+/* Maintenance — a work order: monospaced references, dashed rules, square
+   corners, paper tint. No rounded photo cards (Rent & Sale) and no dark
+   console (Management). */
+
+.mt-page {
+  --mt-mono: ui-monospace, "SFMono-Regular", Menlo, "Courier New", monospace;
+  background: #f4eee3;
+  padding-top: 100px;
+}
+.mt-eyebrow {
+  font-family: var(--mt-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin: 0 0 14px;
+}
+
+/* Hero sheet */
+.mt-hero {
+  max-width: 1240px;
+  margin: auto;
+  padding: 40px 5% 70px;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 46px;
+  align-items: stretch;
+}
+.mt-hero-sheet {
+  background: #fffdf9;
+  border: 1px solid var(--navy);
+  box-shadow: 10px 10px 0 rgba(17, 28, 68, 0.08);
+  padding: 38px;
+}
+.mt-ref {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-family: var(--mt-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  padding-bottom: 16px;
+  border-bottom: 1px dashed var(--sand);
+  margin: 0 0 26px;
+}
+.mt-hero h1 {
+  font-size: 46px;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  color: var(--navy);
+  margin: 0 0 20px;
+}
+.mt-lead {
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--muted);
+  margin: 0 0 28px;
+  max-width: 54ch;
+}
+.mt-hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  padding-bottom: 26px;
+  border-bottom: 1px dashed var(--sand);
+  margin-bottom: 24px;
+}
+.mt-button {
+  border-radius: 2px;
+}
+.mt-ghost-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mt-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--navy);
+  border-bottom: 1px solid var(--navy);
+  padding-bottom: 4px;
+}
+.mt-hero-visual {
+  margin: 0;
+}
+.mt-hero-visual img {
+  width: 100%;
+  height: 100%;
+  min-height: 380px;
+  object-fit: cover;
+  border: 1px solid var(--navy);
+}
+
+/* Section heading */
+.mt-head {
+  max-width: 1240px;
+  margin: 0 auto 38px;
+}
+.mt-head h2 {
+  font-size: 34px;
+  line-height: 1.18;
+  color: var(--navy);
+  margin: 0 0 14px;
+}
+.mt-head > p {
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--muted);
+  max-width: 64ch;
+  margin: 0;
+}
+
+/* Trade catalogue */
+.mt-catalogue {
+  padding: 70px 5%;
+  border-top: 2px solid var(--navy);
+  background: #fffdf9;
+}
+.mt-trades {
+  max-width: 1240px;
+  margin: auto;
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 46px;
+}
+.mt-trades li {
+  display: grid;
+  grid-template-columns: 62px 28px 1fr;
+  gap: 14px;
+  align-items: start;
+  padding: 22px 0;
+  border-bottom: 1px dashed var(--sand);
+}
+.mt-code {
+  font-family: var(--mt-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--sand);
+  padding-top: 4px;
+}
+.mt-trades .material-symbols-outlined {
+  font-size: 22px;
+  color: var(--blue);
+}
+.mt-trades h3 {
+  margin: 0 0 6px;
+  font-size: 17px;
+  color: var(--navy);
+}
+.mt-trades p {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+/* Priorities */
+.mt-priorities {
+  background: var(--navy);
+  color: var(--cream);
+  padding: 70px 5%;
+}
+.mt-head-invert h2 {
+  color: var(--cream);
+}
+.mt-head-invert > p {
+  color: rgba(248, 241, 228, 0.72);
+}
+.mt-head-invert .mt-eyebrow {
+  color: var(--sky);
+}
+.mt-priority-grid {
+  max-width: 1240px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.mt-priority {
+  border: 1px dashed rgba(255, 255, 255, 0.35);
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.mt-priority-level {
+  font-family: var(--mt-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--sky);
+  margin: 0;
+}
+.mt-priority-delay {
+  font-size: 28px;
+  font-weight: 600;
+  margin: 0;
+  color: var(--cream);
+}
+.mt-priority-scope {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.7;
+  color: rgba(248, 241, 228, 0.8);
+}
+.mt-priority-note {
+  margin: auto 0 0;
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  padding-top: 16px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.3);
+  font-family: var(--mt-mono);
+  font-size: 11px;
+  line-height: 1.6;
+  color: rgba(248, 241, 228, 0.7);
+}
+.mt-priority-note .material-symbols-outlined {
+  font-size: 15px;
+  color: var(--sky);
+}
+.mt-priority-urgence {
+  background: rgba(36, 87, 255, 0.16);
+  border-style: solid;
+  border-color: var(--sky);
+}
+
+/* Formulas */
+.mt-formulas {
+  padding: 70px 5%;
+  background: #f4eee3;
+}
+.mt-formula-grid {
+  max-width: 1240px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+.mt-formula-grid article {
+  background: #fffdf9;
+  border: 1px solid var(--navy);
+  padding: 30px 26px;
+  display: flex;
+  flex-direction: column;
+}
+.mt-formula-grid h3 {
+  margin: 0 0 12px;
+  font-size: 20px;
+  color: var(--navy);
+  padding-bottom: 14px;
+  border-bottom: 1px dashed var(--sand);
+}
+.mt-formula-grid > article > p {
+  margin: 0 0 18px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+.mt-formula-grid ul {
+  list-style: none;
+  margin: auto 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--navy);
+}
+.mt-formula-grid li {
+  display: flex;
+  gap: 9px;
+  align-items: center;
+}
+.mt-formula-grid li .material-symbols-outlined {
+  font-size: 17px;
+  color: var(--blue);
+}
+
+/* Finishing band */
+.mt-finishing {
+  max-width: 1240px;
+  margin: auto;
+  padding: 0 5% 80px;
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 46px;
+  align-items: center;
+}
+.mt-finishing img {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  border: 1px solid var(--navy);
+}
+.mt-finishing-copy h2 {
+  font-size: 32px;
+  color: var(--navy);
+  margin: 0 0 14px;
+}
+.mt-finishing-copy > p {
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--muted);
+  margin: 0 0 16px;
+}
+.mt-finishing-note {
+  border-left: 2px solid var(--blue);
+  padding-left: 16px;
+  font-size: 14px;
+}
+html[dir="rtl"] .mt-finishing-note {
+  border-left: 0;
+  border-right: 2px solid var(--blue);
+  padding-left: 0;
+  padding-right: 16px;
+}
+.mt-text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mt-mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--blue);
+}
+.mt-text-link .material-symbols-outlined {
+  font-size: 16px;
+}
+.mt-hero-wa {
+  margin-top: 4px;
+}
+
+@media (max-width: 1000px) {
+  .mt-hero,
+  .mt-finishing {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .mt-trades {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .mt-priority-grid,
+  .mt-formula-grid {
+    grid-template-columns: 1fr;
+  }
+  .mt-hero h1 {
+    font-size: 34px;
+  }
+  .mt-head h2 {
+    font-size: 27px;
+  }
+  .mt-hero-visual img {
+    min-height: 260px;
+    height: 260px;
+  }
+}
+@media (max-width: 640px) {
+  .mt-page {
+    padding-top: 88px;
+  }
+  .mt-hero-sheet {
+    padding: 26px 22px;
+    box-shadow: 6px 6px 0 rgba(17, 28, 68, 0.08);
+  }
+  .mt-catalogue,
+  .mt-priorities,
+  .mt-formulas {
+    padding: 52px 5%;
+  }
+  .mt-trades li {
+    grid-template-columns: 52px 24px 1fr;
+    gap: 10px;
+  }
+}

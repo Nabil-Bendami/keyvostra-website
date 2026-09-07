@@ -1,8 +1,10 @@
+import { useTranslation } from "../i18n";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import Icon from "./Icon";
 
 export default function VideoGreeting() {
+  const { t } = useTranslation();
   const [collapsed, setCollapsed] = useState(false);
   const [opened, setOpened] = useState(false);
   const [failed, setFailed] = useState(false);
@@ -10,6 +12,13 @@ export default function VideoGreeting() {
   const player = useRef(null);
   const dialog = useRef(null);
   const opener = useRef(null);
+  const restoreFocus = useRef(false);
+  useEffect(() => {
+    if (!opened && restoreFocus.current) {
+      opener.current?.focus();
+      restoreFocus.current = false;
+    }
+  }, [opened]);
   const [previewPlaying, setPreviewPlaying] = useState(false);
   useEffect(() => {
     if (collapsed || opened) return;
@@ -39,42 +48,42 @@ export default function VideoGreeting() {
   }
   function onClose() {
     player.current.pause();
+    restoreFocus.current = true;
     setOpened(false);
-    opener.current?.focus();
   }
   return (
     <>
       <aside
         className={`video-greeting ${collapsed ? "is-collapsed" : ""}`}
-        aria-label="Présentation vidéo de Keyvostra"
+        aria-label={t("Présentation vidéo de Keyvostra")}
         hidden={opened}
       >
         {collapsed ? (
           <button
             className="greeting-reopen"
             onClick={() => setCollapsed(false)}
-            aria-label="Afficher la vidéo de présentation"
+            aria-label={t("Afficher la vidéo de présentation")}
           >
             <Icon name="play_arrow" />
-            <span>Un mot d’Achraf</span>
+            <span>{t("Un mot d’Achraf")}</span>
           </button>
         ) : (
           <>
             <button
               className="greeting-dismiss"
-              aria-label="Réduire la vidéo de présentation"
+              aria-label={t("Réduire la vidéo de présentation")}
               onClick={() => setCollapsed(true)}
             >
               <Icon name="close" />
             </button>
             <span className="greeting-bubble">
-              Bonjour ! <span aria-hidden="true">✦</span>
+              {t("Bonjour !")} <span aria-hidden="true">✦</span>
             </span>
             <button
               ref={opener}
               className="greeting-preview"
               onClick={open}
-              aria-label="Ouvrir la présentation vidéo d’Achraf"
+              aria-label={t("Ouvrir la présentation vidéo d’Achraf")}
             >
               <video
                 ref={preview}
@@ -90,7 +99,8 @@ export default function VideoGreeting() {
               />
               <span className="greeting-preview-shade" />
               <span className="greeting-preview-label">
-                Un mot d’Achraf<small>Découvrez Keyvostra</small>
+                {t("Un mot d’Achraf")}
+                <small>{t("Découvrez Keyvostra")}</small>
               </span>
               <span className="greeting-expand">
                 <Icon name="open_in_full" />
@@ -98,11 +108,11 @@ export default function VideoGreeting() {
             </button>
             <button
               className="greeting-pause"
-              aria-label={
+              aria-label={t(
                 previewPlaying
                   ? "Mettre la miniature en pause"
-                  : "Lire la miniature"
-              }
+                  : "Lire la miniature",
+              )}
               onClick={() => {
                 if (preview.current.paused)
                   preview.current.play().catch(() => {});
@@ -127,7 +137,7 @@ export default function VideoGreeting() {
           <button
             className="greeting-dialog-close"
             onClick={close}
-            aria-label="Fermer la présentation vidéo"
+            aria-label={t("Fermer la présentation vidéo")}
             autoFocus
           >
             <Icon name="close" />
@@ -135,27 +145,39 @@ export default function VideoGreeting() {
           <video
             ref={player}
             controls
+            muted
             playsInline
             preload="none"
             poster="/images/founder-explaining-poster.jpg"
             onError={() => setFailed(true)}
           >
-            <source
-              src="/vedio/Businessman_explaining_in_office_202609021653.mp4"
-              type="video/mp4"
-            />
+            <source src="/videos/founder-explaining.mp4" type="video/mp4" />
           </video>
           <div className="greeting-dialog-copy">
-            <p id="greeting-title">Faisons connaissance.</p>
-            <span>Achraf · Fondateur de Keyvostra Group</span>
+            <p id="greeting-title">{t("Faisons connaissance.")}</p>
+            <span>{t("Achraf · Fondateur de Keyvostra Group")}</span>
+            <p className="greeting-silent-label">
+              {t("Présentation sans son")}
+            </p>
+            <p className="greeting-introduction">
+              {t(
+                "Keyvostra Group vous accompagne dans vos projets immobiliers au Maroc et au Royaume-Uni. Nous réunissons cinq expertises : investissement, gestion immobilière, maintenance, élaboration de plans d’affaires, location et vente.",
+              )}
+            </p>
+            <p className="greeting-introduction">
+              {t(
+                "Notre approche : comprendre vos objectifs, vous conseiller avec transparence et suivre votre projet à chaque étape. Faisons connaissance et construisons la suite ensemble.",
+              )}
+            </p>
             {failed && (
               <p role="status">
-                La vidéo est indisponible. Contactez-nous pour parler de votre
-                projet.
+                {t(
+                  "La vidéo est indisponible. Contactez-nous pour parler de votre projet.",
+                )}
               </p>
             )}
             <Link to="/#contact" className="kv-button" onClick={close}>
-              Parlons de votre projet <Icon name="arrow_outward" />
+              {t("Parlons de votre projet")} <Icon name="arrow_outward" />
             </Link>
           </div>
         </div>

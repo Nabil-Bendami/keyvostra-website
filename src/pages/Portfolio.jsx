@@ -1,3 +1,4 @@
+import { useTranslation } from "../i18n";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
@@ -10,25 +11,32 @@ const filters = [
   ["advisory", "Conseil agricole"],
 ];
 export default function Portfolio() {
+  const { t } = useTranslation();
   const [filter, setFilter] = useState("all");
   return (
     <div className="project-index home-page case-container">
       <SEO
-        title="Nos réalisations — Keyvostra Group"
-        description="Quatre études de cas : investissement résidentiel, gestion immobilière, structuration foncière et conseil agricole."
+        title={t("Nos réalisations — Keyvostra Group")}
+        description={t(
+          "Quatre études de cas : investissement résidentiel, gestion immobilière, structuration foncière et conseil agricole.",
+        )}
         path="/portfolio"
       />
-      <p className="eyebrow">KEYVOSTRA GROUP · NOS RÉALISATIONS</p>
+      <p className="eyebrow">{t("KEYVOSTRA GROUP · NOS RÉALISATIONS")}</p>
       <h1>
-        Des projets.
+        {t("Des projets.")}
         <br />
-        <em>Des réponses concrètes.</em>
+        <em>{t("Des réponses concrètes.")}</em>
       </h1>
       <p className="project-index-intro">
-        Découvrez les missions présentées par Keyvostra, de l’acquisition d’un
-        appartement à la structuration d’un projet foncier ou agricole.
+        {t(
+          "Découvrez les missions présentées par Keyvostra, de l’acquisition d’un appartement à la structuration d’un projet foncier ou agricole.",
+        )}
       </p>
-      <div className="portfolio-filters" aria-label="Filtrer les réalisations">
+      <div
+        className="portfolio-filters"
+        aria-label={t("Filtrer les réalisations")}
+      >
         {filters.map(([key, label]) => (
           <button
             key={key}
@@ -37,13 +45,14 @@ export default function Portfolio() {
             className={filter === key ? "selected" : ""}
             onClick={() => setFilter(key)}
           >
-            {label}
+            {t(label)}
           </button>
         ))}
       </div>
       <p className="project-image-notice">
-        Les photos sont des illustrations. Les descriptions et résultats ont été
-        communiqués par Keyvostra Group.
+        {t(
+          "Les photos sont des illustrations. Les descriptions et résultats ont été communiqués par Keyvostra Group.",
+        )}
       </p>
       <div className="case-grid">
         {projects
@@ -53,20 +62,20 @@ export default function Portfolio() {
               <div className="case-card-image">
                 <img
                   src={p.image}
-                  alt={p.alt}
+                  alt={t(p.alt)}
                   width="800"
                   height="600"
                   loading="lazy"
                 />
-                <span>{p.category}</span>
-                <small>PHOTO D’ILLUSTRATION</small>
+                <span>{t(p.category)}</span>
+                <small>{t("PHOTO D’ILLUSTRATION")}</small>
               </div>
               <div className="case-card-copy">
-                <p>{p.location}</p>
-                <h2>{p.title}</h2>
-                <p>{p.summary}</p>
+                <p>{t(p.location)}</p>
+                <h2>{t(p.title)}</h2>
+                <p>{t(p.summary)}</p>
                 <span className="case-card-link">
-                  Découvrir le projet <Icon name="arrow_outward" />
+                  {t("Découvrir le projet")} <Icon name="arrow_outward" />
                 </span>
               </div>
             </Link>

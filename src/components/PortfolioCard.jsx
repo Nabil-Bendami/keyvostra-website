@@ -1,3 +1,4 @@
+import { useTranslation } from "../i18n";
 import Icon from "./Icon";
 
 const SPAN_CLASSES = {
@@ -15,6 +16,7 @@ const CATEGORY_LABELS = {
 };
 
 export default function PortfolioCard({ project }) {
+  const { t } = useTranslation();
   const isLarge = project.size === "featured" || project.size === "wide";
 
   return (
@@ -24,32 +26,41 @@ export default function PortfolioCard({ project }) {
       <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors z-10 duration-500" />
       <img
         src={project.image}
-        alt={project.alt}
+        alt={t(project.alt)}
         loading="lazy"
         className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
       />
-      <div className={`absolute bottom-0 left-0 w-full z-20 bg-gradient-to-t from-black/80 to-transparent ${isLarge ? "p-8" : "p-6"}`}>
+      <div
+        className={`absolute bottom-0 left-0 w-full z-20 bg-gradient-to-t from-black/80 to-transparent ${isLarge ? "p-8" : "p-6"}`}
+      >
         <div className="flex gap-2 mb-2">
           {project.categories.map((cat) => (
             <span
               key={cat}
               className="px-3 py-1 bg-surface/90 backdrop-blur-sm text-primary font-label-sm text-label-sm rounded uppercase tracking-wider"
             >
-              {CATEGORY_LABELS[cat] ?? cat}
+              {t(CATEGORY_LABELS[cat] ?? cat)}
             </span>
           ))}
         </div>
         {isLarge ? (
           <>
-            <h2 className="font-headline-md text-headline-md text-on-primary mb-2">{project.title}</h2>
+            <h2 className="font-headline-md text-headline-md text-on-primary mb-2">
+              {t(project.title)}
+            </h2>
             <p className="font-body-md text-body-md text-on-primary/80 flex items-center gap-2">
-              <Icon name="location_on" className="text-[18px]" /> {project.location}
+              <Icon name="location_on" className="text-[18px]" />{" "}
+              {t(project.location)}
             </p>
           </>
         ) : (
           <>
-            <h2 className="font-body-lg text-body-lg font-semibold text-on-primary mb-1">{project.title}</h2>
-            <p className="font-label-sm text-label-sm text-on-primary/80">{project.location}</p>
+            <h2 className="font-body-lg text-body-lg font-semibold text-on-primary mb-1">
+              {t(project.title)}
+            </h2>
+            <p className="font-label-sm text-label-sm text-on-primary/80">
+              {t(project.location)}
+            </p>
           </>
         )}
       </div>

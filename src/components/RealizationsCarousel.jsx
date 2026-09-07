@@ -1,3 +1,4 @@
+import { useTranslation } from "../i18n";
 import { useEffect, useRef, useState } from "react";
 import Icon from "./Icon";
 import { Link } from "react-router-dom";
@@ -9,6 +10,7 @@ const emptySlots = Array.from({ length: 6 }, (_, index) => ({
 }));
 
 export default function RealizationsCarousel() {
+  const { t, language } = useTranslation();
   const viewport = useRef(null);
   const group = useRef(null);
   const cycle = useRef(0);
@@ -115,29 +117,31 @@ export default function RealizationsCarousel() {
       aria-labelledby="realizations-title"
     >
       <div className="realizations-heading section-heading">
-        <p className="eyebrow">03 — NOS RÉALISATIONS</p>
+        <p className="eyebrow">{t("03 — NOS RÉALISATIONS")}</p>
         <h2 id="realizations-title">
-          Des projets.
+          {t("Des projets.")}
           <br />
-          <em>Des histoires à partager.</em>
+          <em>{t("Des histoires à partager.")}</em>
         </h2>
         <p>
-          Investissement, gestion, foncier et conseil agricole : quatre
-          missions, une même exigence.
+          {t(
+            "Investissement, gestion, foncier et conseil agricole : quatre missions, une même exigence.",
+          )}
         </p>
         <Link className="text-link" to="/portfolio">
-          Toutes nos réalisations <Icon name="arrow_outward" />
+          {t("Toutes nos réalisations")} <Icon name="arrow_outward" />
         </Link>
         <small className="project-image-notice">
-          Photos d’illustration · Projets et résultats communiqués par Keyvostra
-          Group.
+          {t(
+            "Photos d’illustration · Projets et résultats communiqués par Keyvostra Group.",
+          )}
         </small>
       </div>
       <div
         className="realizations-carousel"
         role="region"
-        aria-roledescription="carrousel"
-        aria-label="Galerie des réalisations"
+        aria-roledescription={t("carrousel")}
+        aria-label={t("Galerie des réalisations")}
         onMouseEnter={() => {
           hovering.current = true;
         }}
@@ -154,9 +158,12 @@ export default function RealizationsCarousel() {
       >
         <div
           className="realizations-viewport"
+          dir="ltr"
           ref={viewport}
           tabIndex={0}
-          aria-label="Galerie horizontale, utilisez les flèches pour naviguer"
+          aria-label={t(
+            "Galerie horizontale, utilisez les flèches pour naviguer",
+          )}
           onPointerDown={() => {
             dragging.current = true;
           }}
@@ -180,35 +187,36 @@ export default function RealizationsCarousel() {
               >
                 {items.map((item, index) => (
                   <article
+                    dir={language === "ar" ? "rtl" : "ltr"}
                     className={`realization-slot slot-${index % 3} ${item.empty ? "is-empty" : ""}`}
                     key={item.id}
-                    aria-label={
+                    aria-label={t(
                       item.empty
                         ? "Emplacement de réalisation à venir"
-                        : item.title
-                    }
+                        : item.title,
+                    )}
                   >
                     {item.image ? (
                       <Link
                         className="realization-window realization-project-image"
                         to={item.href}
                         tabIndex={copy === 1 ? 0 : -1}
-                        aria-label={`Découvrir ${item.title}`}
+                        aria-label={`${t("Découvrir le projet")} : ${t(item.title)}`}
                       >
                         <img
                           src={item.image}
-                          alt={item.alt || item.title}
+                          alt={t(item.alt || item.title)}
                           loading="lazy"
                           width="600"
                           height="960"
                         />
                         <span className="realization-category">
-                          {item.category}
+                          {t(item.category)}
                         </span>
                         <div className="realization-overlay">
-                          <strong>{item.metric}</strong>
-                          <span>{item.metricLabel}</span>
-                          <small>PHOTO D’ILLUSTRATION</small>
+                          <strong>{t(item.metric)}</strong>
+                          <span>{t(item.metricLabel)}</span>
+                          <small>{t("PHOTO D’ILLUSTRATION")}</small>
                         </div>
                       </Link>
                     ) : (
@@ -225,14 +233,16 @@ export default function RealizationsCarousel() {
                     ) : (
                       <div className="realization-caption">
                         <div>
-                          <h3>{item.shortTitle || item.title}</h3>
-                          <p className="realization-summary">{item.summary}</p>
+                          <h3>{t(item.shortTitle || item.title)}</h3>
+                          <p className="realization-summary">
+                            {t(item.summary)}
+                          </p>
                         </div>
                         {item.href && (
                           <Link
                             to={item.href}
                             tabIndex={copy === 1 ? 0 : -1}
-                            aria-label={`Découvrir ${item.title}`}
+                            aria-label={`${t("Découvrir le projet")} : ${t(item.title)}`}
                           >
                             <Icon name="arrow_forward" />
                           </Link>
@@ -249,7 +259,7 @@ export default function RealizationsCarousel() {
           className="realizations-arrow previous"
           type="button"
           onClick={() => step(-1)}
-          aria-label="Réalisation précédente"
+          aria-label={t("Réalisation précédente")}
         >
           <Icon name="chevron_left" />
         </button>
@@ -257,7 +267,7 @@ export default function RealizationsCarousel() {
           className="realizations-arrow next"
           type="button"
           onClick={() => step(1)}
-          aria-label="Réalisation suivante"
+          aria-label={t("Réalisation suivante")}
         >
           <Icon name="chevron_right" />
         </button>
@@ -269,7 +279,7 @@ export default function RealizationsCarousel() {
             onClick={() => setPaused(!paused)}
           >
             <Icon name={paused ? "play_arrow" : "pause"} />
-            {paused ? "Reprendre le défilement" : "Mettre en pause"}
+            {t(paused ? "Reprendre le défilement" : "Mettre en pause")}
           </button>
         )}
       </div>

@@ -203,3 +203,46 @@ Four client-supplied cases are maintained in `src/data/projects.js`, shared by t
 
 The supplied outcomes are attributed to Keyvostra: the 15% figure describes the residential case, the land case is a marketed opportunity (not a completed sale), and agricultural work is advisory/forecasting. No investor identity is published. All images are locally stored Unsplash illustrations, labelled on cards and detail pages; provenance is in `public/images/projects/SOURCES.md`.
 # keyvostra-website
+
+## Langues et présentation
+
+Le sélecteur propose le français (par défaut), l’anglais et l’arabe. Le choix est
+conservé dans `localStorage` sous `keyvostra-language`. Le changement de langue
+actualise le contenu, les libellés accessibles, les métadonnées et la direction
+RTL/LTR sans effacer les champs du formulaire. Les noms, coordonnées, URL et
+valeurs des options envoyées au formulaire restent stables.
+
+Les traductions éditoriales sont dans `src/i18n/messages.json`. Chaque entrée
+contient `fr`, `en` et `ar`; sa clé est le texte source historique, qui peut être
+en français ou en anglais. Modifier les trois valeurs ensemble pour conserver
+le même sens. Dans les composants, utiliser `useTranslation()` et `t(...)` pour
+les textes, y compris les textes dynamiques issus des données. Le catalogue est
+local : aucun service de traduction automatique n’est appelé.
+
+Le dialogue de présentation utilise `/videos/founder-explaining.mp4`, une vidéo
+sans piste audio, avec `muted` et un texte de présentation traduit affiché à côté
+(sous la vidéo sur mobile). Les liens LinkedIn utilisent tous la destination
+centralisée dans `site.founder.linkedin`.
+
+Validation : `npm run build`, `npm run lint`, puis `npm test`.
+Installer le navigateur de test avec `npx playwright install chromium` si besoin.
+Les tests vérifient les pages dans les trois langues, la conservation du choix,
+le formulaire, le dialogue et la navigation LinkedIn. La destination LinkedIn
+est interceptée dans les tests : ils vérifient le clic et l’URL, pas la disponibilité
+ni l’authentification du service externe.
+
+### Introduction de bienvenue
+
+`WelcomeIntro` affiche un accueil plein écran à la première visite : tracé SVG
+animé de « hello », nom du groupe, choix de langue et bouton d’entrée. La clé
+`keyvostra-welcome-seen` vaut `1` après l’entrée, le bouton « Passer » ou Échap.
+Le bouton « Revoir l’introduction » du pied de page permet de la relancer. La
+fermeture conserve la page et l’ancre demandées. Sans stockage disponible,
+l’introduction reste utilisable mais pourra réapparaître après rechargement.
+Le dialogue gère le focus clavier et respecte `prefers-reduced-motion`.
+
+Pour prévisualiser directement l’introduction et son écriture, ouvrir `/?intro=1`.
+Ce lien ignore l’état « déjà vue ». « Rejouer l’animation », dans l’introduction,
+relance les deux mots depuis zéro. Ce déclenchement explicite (ou le bouton de
+relecture du pied de page) autorise uniquement l’écriture lorsque la réduction
+des mouvements est active ; les mouvements d’ambiance restent désactivés.

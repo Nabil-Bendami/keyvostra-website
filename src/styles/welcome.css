@@ -1,0 +1,351 @@
+.welcome-intro {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  background: #f7f6f2;
+  color: #203954;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.welcome-intro::backdrop {
+  background: #f7f6f2;
+}
+body:has(.welcome-intro[open]) {
+  overflow: hidden;
+}
+.welcome-scene {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100%;
+  min-height: 100dvh;
+  overflow: hidden;
+  padding: max(30px, env(safe-area-inset-top)) 5%
+    max(14px, env(safe-area-inset-bottom));
+}
+.welcome-glow {
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.65;
+}
+.welcome-glow-blue {
+  width: 80vw;
+  height: 85vh;
+  inset: -40% auto auto -25%;
+  background: radial-gradient(ellipse, #adc7e7, #d6e2ed77 50%, transparent 70%);
+}
+.welcome-glow-gold {
+  width: 75vw;
+  height: 90vh;
+  inset: auto -30% -40% auto;
+  background: radial-gradient(ellipse, #e8c09c, #ead7bd66 50%, transparent 70%);
+}
+.welcome-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+.welcome-monogram svg {
+  width: 28px;
+  height: 32px;
+}
+.welcome-skip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  padding: 12px;
+  border-radius: 30px;
+  color: #5e6c79;
+}
+.welcome-skip:hover {
+  background: #20395408;
+  color: #203954;
+}
+.welcome-skip .material-symbols-outlined {
+  font-size: 17px;
+}
+.welcome-center {
+  text-align: center;
+  width: min(800px, 100%);
+  margin: auto;
+  padding-block: 34px;
+}
+.welcome-handwriting {
+  display: block;
+  width: min(540px, 90%);
+  height: auto;
+  margin: 0 auto 12px;
+  overflow: visible;
+  direction: ltr;
+}
+.welcome-center h2 {
+  font-family: "Hanken Grotesk", Arial, sans-serif;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.5;
+  font-size: 17px;
+}
+.welcome-center h2 > span {
+  color: #71808e;
+  font-size: 15px;
+}
+.welcome-center h2 strong {
+  display: block;
+  font-weight: 500;
+  letter-spacing: 0.23em;
+  font-size: clamp(20px, 3vw, 35px);
+  margin-top: 12px;
+}
+.welcome-center h2 strong > .welcome-group {
+  display: block;
+  letter-spacing: 0.5em;
+  font-size: 10px;
+  margin-top: 9px;
+}
+.welcome-tagline {
+  font-size: 13px;
+  color: #71808e;
+  margin-top: 25px;
+}
+.welcome-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 26px;
+  padding-top: 20px;
+}
+.welcome-enter {
+  display: inline-flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 13px;
+  font-size: 13px;
+  color: #203954;
+  border-radius: 12px;
+  padding: 8px 20px;
+}
+.welcome-enter-icon {
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border: 1px solid #20395430;
+  border-radius: 50%;
+  background: #ffffff70;
+  box-shadow: 0 6px 25px #20395406;
+  transition:
+    background 0.25s,
+    transform 0.25s;
+}
+.welcome-enter:hover .welcome-enter-icon {
+  background: #203954;
+  color: white;
+  transform: translateY(-3px);
+}
+.welcome-enter:focus-visible,
+.welcome-skip:focus-visible,
+.welcome-languages button:focus-visible {
+  outline: 2px solid #527a9c;
+  outline-offset: 5px;
+}
+.welcome-languages {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.welcome-languages button {
+  font-size: 11px;
+  color: #647587;
+  padding: 7px 12px;
+  border-radius: 20px;
+  border: 1px solid transparent;
+}
+.welcome-languages button[aria-pressed="true"] {
+  border-color: #20395425;
+  color: #203954;
+  background: #ffffff65;
+}
+.welcome-home-indicator {
+  display: block;
+  width: 110px;
+  height: 4px;
+  border-radius: 5px;
+  background: #203954;
+  opacity: 0.65;
+}
+.welcome-replay {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .welcome-intro[open] .welcome-handwriting path,
+  .welcome-intro[open] .welcome-brand-handwriting path {
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+    animation: welcome-write 0.85s cubic-bezier(0.4, 0, 0.2, 1) var(--ink-delay)
+      forwards;
+  }
+  .welcome-center h2 > span {
+    animation: welcome-appear 1s 2s both;
+  }
+  .welcome-group {
+    animation: welcome-appear 0.8s 5.4s both;
+  }
+  .welcome-tagline {
+    animation: welcome-appear 1s 5.6s both;
+  }
+  .welcome-glow {
+    animation: welcome-light 4s ease-out both;
+  }
+  .welcome-leaving {
+    animation: welcome-depart 0.5s ease-in forwards;
+  }
+}
+@keyframes welcome-write {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes welcome-appear {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes welcome-light {
+  from {
+    opacity: 0.15;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 0.65;
+    transform: scale(1);
+  }
+}
+@keyframes welcome-depart {
+  to {
+    opacity: 0;
+    transform: scale(1.025);
+  }
+}
+@media (max-width: 600px) {
+  .welcome-scene {
+    padding-inline: 6%;
+  }
+  .welcome-center {
+    padding-block: 40px;
+  }
+  .welcome-handwriting {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .welcome-center h2 strong {
+    font-size: 23px;
+    letter-spacing: 0.18em;
+  }
+  .welcome-bottom {
+    gap: 20px;
+  }
+  .welcome-glow-blue,
+  .welcome-glow-gold {
+    width: 130vw;
+  }
+}
+@media (max-height: 600px) and (min-width: 601px) {
+  .welcome-center {
+    padding-block: 10px;
+  }
+  .welcome-handwriting {
+    width: 260px;
+    margin-bottom: 0;
+  }
+  .welcome-bottom {
+    gap: 8px;
+    padding-top: 8px;
+  }
+  .welcome-enter {
+    flex-direction: row;
+  }
+  .welcome-tagline {
+    margin-top: 10px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .welcome-intro *,
+  .welcome-intro {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+html[dir="rtl"] .welcome-enter-icon,
+html[dir="rtl"] .welcome-skip .material-symbols-outlined {
+  transform: scaleX(-1);
+}
+html[dir="rtl"] .welcome-center h2 {
+  font-size: 17px;
+}
+
+.welcome-brand-handwriting {
+  display: block;
+  width: min(510px, 100%);
+  height: auto;
+  margin-inline: auto;
+  overflow: visible;
+  direction: ltr;
+}
+@media (max-height: 600px) and (min-width: 601px) {
+  .welcome-brand-handwriting {
+    width: 320px;
+  }
+}
+
+/* An explicit replay may animate the lettering even with reduced motion enabled.
+   Ambient movement remains disabled; hidden dialogs never consume the timeline. */
+.welcome-intro[open].welcome-play-motion .welcome-handwriting path,
+.welcome-intro[open].welcome-play-motion .welcome-brand-handwriting path {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: welcome-write 0.85s cubic-bezier(0.4, 0, 0.2, 1) var(--ink-delay)
+    both !important;
+}
+.welcome-restart {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #526c85;
+  padding: 7px 12px;
+  border-radius: 20px;
+}
+.welcome-restart:hover {
+  background: #20395408;
+}
+.welcome-restart:focus-visible {
+  outline: 2px solid #527a9c;
+  outline-offset: 4px;
+}
+.welcome-restart .material-symbols-outlined {
+  font-size: 18px;
+}
+.welcome-bottom {
+  gap: 16px;
+}

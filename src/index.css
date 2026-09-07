@@ -3529,24 +3529,14 @@ body:has(.greeting-dialog[open]) {
   color: var(--blue);
   flex-shrink: 0;
 }
-.footer-ma,
-.footer-uk {
-  display: flex;
-  gap: 25px;
-  flex-wrap: wrap;
+.footer-reach {
   max-width: 1280px;
   margin: auto;
-  padding: 0 0 25px;
-  font-size: 11px;
-  color: #d8e3ff;
-  overflow-wrap: anywhere;
-}
-.footer-ma a:hover,
-.footer-uk a:hover {
-  color: white;
-}
-.footer-ma {
-  padding-bottom: 14px;
+  padding: 0 0 38px;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 40px 60px;
+  align-items: start;
 }
 @media (max-width: 800px) {
   .international-section {
@@ -3588,10 +3578,9 @@ body:has(.greeting-dialog[open]) {
   .international-markets > div {
     gap: 7px;
   }
-  .footer-ma,
-  .footer-uk {
-    flex-direction: column;
-    gap: 13px;
+  .footer-reach {
+    grid-template-columns: 1fr;
+    gap: 32px;
   }
   .uk-contact-block {
     padding: 20px;
@@ -3619,4 +3608,65 @@ body:has(.greeting-dialog[open]) {
   .uk-founder-links a {
     font-size: 11px;
   }
+}
+
+/* Language selection remains available on desktop and mobile. */
+.language-picker { flex-shrink: 0; margin-inline-start: auto; }
+.language-picker select {
+  background-color: transparent;
+  border: 1px solid currentColor;
+  border-radius: 4px;
+  color: inherit;
+  font: inherit;
+  font-size: 13px;
+  padding: 8px 26px 8px 10px;
+  cursor: pointer;
+  max-width: 112px;
+}
+.language-picker option { color: #111c44; background: #fff; }
+.language-picker select:focus-visible { outline: 2px solid #bfa574; outline-offset: 4px; }
+.greeting-dialog-copy .greeting-silent-label { font-size: 12px; letter-spacing: .04em; text-transform: uppercase; color: #b99a60; margin-block: 16px 8px; }
+.greeting-dialog-copy .greeting-introduction { font-family: inherit; font-size: 15px; line-height: 1.8; margin-block: 12px; }
+.greeting-dialog { max-height: 90dvh; overflow-y: auto; }
+.greeting-dialog-inner { align-items: center; }
+.footer-top > div { flex-wrap: wrap; }
+.browser-address { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+html[dir="rtl"] body { font-family: Tahoma, Arial, sans-serif; }
+html[dir="rtl"] h1, html[dir="rtl"] h2, html[dir="rtl"] h3,
+html[dir="rtl"] h4, html[dir="rtl"] p, html[dir="rtl"] .eyebrow,
+html[dir="rtl"] .cinematic-kicker { letter-spacing: normal; }
+html[dir="rtl"] h1:not(.cinematic-wordmark), html[dir="rtl"] h2, html[dir="rtl"] h3,
+html[dir="rtl"] h4 { font-family: Tahoma, Arial, sans-serif; line-height: 1.5; }
+html[dir="rtl"] em { font-style: normal; }
+html[dir="rtl"] .founder-copy, html[dir="rtl"] .international-copy,
+html[dir="rtl"] .greeting-dialog-copy, html[dir="rtl"] .kv-form,
+html[dir="rtl"] .realization-caption, html[dir="rtl"] .case-card-copy { text-align: start; }
+.brand, .cinematic-wordmark, .cinematic-group, .showcase-brand, .browser-toolbar,
+.phone-status-bar, .linkedin-mark, a[href^="tel:"], a[href^="mailto:"] { direction: ltr; unicode-bidi: isolate; }
+html[dir="rtl"] .showcase-profile { direction: ltr; }
+html[dir="rtl"] .showcase-profile-copy { direction: rtl; text-align: start; }
+html[dir="rtl"] .showcase-profile-copy h3 { font-family: inherit; }
+html[dir="rtl"] .realization-summary { direction: rtl; }
+@media (max-width: 1100px) {
+  .kv-nav { gap: 14px; }
+  .desktop-nav { gap: 16px; }
+  .nav-cta { display: none; }
+}
+@media (max-width: 600px) {
+  .kv-nav { gap: 10px; }
+  .language-picker select { max-width: 98px; font-size: 12px; }
+  .greeting-dialog-copy .greeting-introduction { font-size: 14px; }
+}
+@media (min-width: 760px) {
+  .greeting-dialog { width: min(920px, calc(100vw - 64px)); }
+  .greeting-dialog-inner { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); }
+  .greeting-dialog video { max-height: 78dvh; aspect-ratio: 9/16; }
+  .greeting-dialog-copy { padding: 32px; }
+}
+html[dir="rtl"] .greeting-dialog-close { right: auto; left: 12px; }
+html[dir="rtl"] .cinematic-kicker,
+html[dir="rtl"] .hero-countries,
+html[dir="rtl"] .cinematic-bottom { font-size: 11px; }
+@media (max-width: 759px) {
+  .greeting-dialog video { max-height: 38dvh; width: 100%; }
 }

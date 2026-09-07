@@ -1,6 +1,8 @@
+import { useTranslation } from "../i18n";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Icon from "./Icon";
+import { languages } from "../i18n";
 const links = [
   ["Le groupe", "/#approche"],
   ["Nos expertises", "/#expertises"],
@@ -8,6 +10,7 @@ const links = [
   ["Contact", "/#contact"],
 ];
 export default function Navbar() {
+  const { t, language, setLanguage } = useTranslation();
   const [openKey, setOpenKey] = useState(null);
   const location = useLocation();
   const open = openKey === location.key;
@@ -23,10 +26,14 @@ export default function Navbar() {
   return (
     <header className="kv-header">
       <a href="#main-content" className="skip-link">
-        Aller au contenu
+        {t("Aller au contenu")}
       </a>
-      <nav className="kv-nav" aria-label="Navigation principale">
-        <Link to="/" className="brand" aria-label="Keyvostra Group — Accueil">
+      <nav className="kv-nav" aria-label={t("Navigation principale")}>
+        <Link
+          to="/"
+          className="brand"
+          aria-label={t("Keyvostra Group — Accueil")}
+        >
           <svg viewBox="0 0 40 44" fill="none" aria-hidden="true">
             <path
               d="M5 38V8L18 3V38M23 3V38M23 22L36 8M23 22L36 38"
@@ -35,23 +42,38 @@ export default function Navbar() {
             />
           </svg>
           <span>
-            KEYVOSTRA<small>G R O U P</small>
+            {t("KEYVOSTRA")}
+            <small>{t("G R O U P")}</small>
           </span>
         </Link>
         <div className="desktop-nav">
           {links.map(([label, to]) => (
             <Link key={to} to={to}>
-              {label}
+              {t(label)}
             </Link>
           ))}
         </div>
+        <label className="language-picker">
+          <span className="sr-only">{t("Langue du site")}</span>
+          <select
+            value={language}
+            onChange={(event) => setLanguage(event.target.value)}
+            aria-label={t("Langue du site")}
+          >
+            {languages.map(({ code, label }) => (
+              <option key={code} value={code} lang={code}>
+                {label}
+              </option>
+            ))}
+          </select>
+        </label>
         <Link className="kv-button nav-cta" to="/#contact">
-          Réserver une consultation <Icon name="arrow_outward" />
+          {t("Réserver une consultation")} <Icon name="arrow_outward" />
         </Link>
         <button
           className="menu-toggle"
           type="button"
-          aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
+          aria-label={t(open ? "Fermer le menu" : "Ouvrir le menu")}
           aria-expanded={open}
           aria-controls="mobile-nav"
           onClick={() => setOpen(!open)}
@@ -63,7 +85,7 @@ export default function Navbar() {
         <div className="mobile-nav" id="mobile-nav">
           {links.map(([label, to]) => (
             <Link onClick={() => setOpen(false)} key={to} to={to}>
-              {label}
+              {t(label)}
               <Icon name="arrow_outward" />
             </Link>
           ))}
@@ -72,7 +94,7 @@ export default function Navbar() {
             to="/#contact"
             onClick={() => setOpen(false)}
           >
-            Réserver une consultation
+            {t("Réserver une consultation")}
           </Link>
         </div>
       )}

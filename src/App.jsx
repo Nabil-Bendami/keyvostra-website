@@ -1,10 +1,14 @@
+import { useTranslation } from "./i18n";
 import { Suspense, lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import StickyCTA from "./components/StickyCTA";
 import VideoGreeting from "./components/VideoGreeting";
+import WelcomeIntro from "./components/WelcomeIntro";
 import ScrollToTop from "./components/ScrollToTop";
+import WhatsAppFab from "./components/WhatsAppFab";
+import "./styles/services.css";
 
 const Home = lazy(() => import("./pages/Home"));
 const About = lazy(() => import("./pages/About"));
@@ -19,15 +23,17 @@ const Contact = lazy(() => import("./pages/Contact"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 export default function App() {
+  const { t } = useTranslation();
   return (
     <div className="min-h-screen flex flex-col bg-background text-on-background">
+      <WelcomeIntro />
       <ScrollToTop />
       <Navbar />
-      <main id="main-content" className="flex-grow">
+      <main tabIndex={-1} id="main-content" className="flex-grow">
         <Suspense
           fallback={
             <div className="pt-[140px] pb-section-padding text-center text-on-surface-variant">
-              Loading…
+              {t("Loading…")}
             </div>
           }
         >
@@ -48,6 +54,7 @@ export default function App() {
       </main>
       <Footer />
       <StickyCTA />
+      <WhatsAppFab />
       <VideoGreeting />
     </div>
   );

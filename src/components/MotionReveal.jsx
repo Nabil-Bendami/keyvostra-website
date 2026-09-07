@@ -5,7 +5,7 @@ export default function MotionReveal({ children }) {
     const motion = matchMedia("(prefers-reduced-motion: reduce)");
     let observer;
     const elements = root.current.querySelectorAll(
-      ".international-copy, .uk-founder-card, .section-heading, .founder-showcase, .founder-copy, .expertise-card, .home-project, .trust-promises > div, .contact-section > div",
+      ".invest-reveal, .international-copy, .uk-founder-card, .section-heading, .founder-showcase, .founder-copy, .expertise-card, .home-project, .trust-promises > div, .contact-section > div",
     );
     function setup() {
       observer?.disconnect();
