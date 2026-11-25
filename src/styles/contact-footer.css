@@ -1,0 +1,501 @@
+/* Contact and footer share the site's cream surface and Hanken Grotesk. */
+.contact-section,
+footer.kv-footer {
+  --contact-muted: #515972;
+  background: var(--cream);
+  color: var(--navy);
+}
+.kv-section.contact-section {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 64px;
+  padding-block: 64px;
+}
+.contact-section > div,
+.footer-layout > *,
+.footer-reach > *,
+.contact-channels li {
+  min-width: 0;
+}
+.contact-section :is(h1, h2) {
+  font-size: clamp(32px, 3.6vw, 48px);
+  line-height: 1.15;
+  letter-spacing: -0.035em;
+  margin-bottom: 20px;
+}
+.contact-section em,
+.contact-section a,
+.contact-section .eyebrow {
+  color: var(--navy);
+}
+.contact-section > div > p:not(.eyebrow) {
+  color: var(--contact-muted);
+  font-size: 15px;
+  line-height: 24px;
+  max-width: 44ch;
+}
+.contact-section .home-form {
+  background: transparent;
+  box-shadow: none;
+  border: 0;
+  border-inline-start: 1px solid var(--line);
+  border-radius: 0;
+  padding: 0 0 0 32px;
+  padding-inline: 32px 0;
+}
+.contact-section .home-form > h3 {
+  font-size: 24px;
+  line-height: 30px;
+}
+.contact-section .kv-form :is(input, select, textarea) {
+  background: transparent;
+  color: var(--navy);
+  font-size: 16px;
+  min-width: 0;
+  min-height: 44px;
+}
+.contact-section .kv-button,
+.contact-section .wa-button {
+  background: transparent;
+  color: var(--navy);
+  border: 1px solid var(--navy);
+  border-radius: 0;
+  box-shadow: none;
+  min-height: 44px;
+}
+.contact-section .wa-button:hover,
+.contact-section .kv-button:hover {
+  background: rgb(17 28 68 / 5%);
+  transform: none;
+}
+.contact-section .contact-page-channels {
+  margin-top: 32px;
+}
+.contact-section .contact-direct ul {
+  gap: 0 16px;
+}
+.contact-section .contact-direct a {
+  min-height: 44px;
+  border: 0;
+  border-radius: 0;
+  padding: 8px 0;
+  background: transparent;
+}
+.contact-channels .contact-channels-heading {
+  margin: 0 0 16px;
+  padding: 0;
+  border: 0;
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--navy);
+}
+.contact-channels ul {
+  gap: 14px;
+}
+.contact-channels li > a,
+.contact-channels li > div {
+  min-height: 44px;
+  align-items: flex-start;
+  gap: 10px;
+}
+.contact-channels .contact-channel-tile,
+.contact-channels li > a:hover .contact-channel-tile {
+  width: 20px;
+  height: 24px;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--navy);
+  box-shadow: none;
+}
+.contact-icon {
+  display: block;
+  flex: none;
+  width: 20px;
+  height: 20px;
+}
+.contact-channel-text {
+  min-width: 0;
+  gap: 2px;
+  overflow-wrap: anywhere;
+}
+.contact-channel-main {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  min-width: 0;
+}
+.contact-channel-text small {
+  padding-inline-start: 30px;
+}
+.contact-channel-text strong {
+  min-width: 0;
+  color: var(--navy);
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+.contact-channel-text small,
+.uk-contact-role {
+  color: var(--contact-muted, #515972);
+  font-size: 14px;
+  line-height: 20px;
+}
+.uk-contact-role {
+  margin-top: 12px;
+  text-wrap: balance;
+}
+.contact-channels a {
+  text-decoration: none;
+}
+.contact-channels a:hover strong {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+}
+footer.kv-footer {
+  padding: 48px max(24px, 4vw) max(24px, env(safe-area-inset-bottom, 0px));
+  border-top: 1px solid var(--line);
+}
+.footer-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 2fr);
+  gap: 64px;
+  max-width: 1280px;
+  margin-inline: auto;
+}
+.footer-intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.footer-brand {
+  display: inline-flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-height: 44px;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  direction: ltr;
+}
+.footer-brand span {
+  font-size: 9px;
+  letter-spacing: 0.04em;
+}
+.footer-signature {
+  color: var(--contact-muted);
+  font-size: 14px;
+  line-height: 22px;
+  margin: 0 0 20px;
+}
+.footer-navigation {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  line-height: 20px;
+}
+.kv-footer .footer-contact {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: 8px;
+  padding: 0;
+  border: 0;
+  font-size: 14px;
+}
+.kv-footer .footer-reach {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px;
+  margin: 0;
+  padding: 0;
+}
+.kv-footer .footer-bottom {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 24px;
+  margin-top: 32px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  color: var(--navy);
+  font-size: 13px;
+  line-height: 20px;
+}
+.footer-social {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0 24px;
+}
+.kv-footer .welcome-replay {
+  font: inherit;
+  color: inherit;
+  text-decoration: none;
+}
+.footer-legal {
+  color: var(--contact-muted);
+  text-align: end;
+}
+.footer-legal p + p {
+  margin-top: 4px;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+}
+.kv-footer :is(a, button) {
+  min-width: 44px;
+  min-height: 44px;
+}
+.footer-navigation a,
+.footer-social :is(a, button) {
+  display: inline-flex;
+  align-items: center;
+}
+.kv-footer :is(a, button):hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+}
+.kv-footer :is(a, button):focus-visible,
+.contact-section :is(a, button, input, select, textarea):focus-visible {
+  outline: 2px solid var(--navy);
+  outline-offset: 4px;
+}
+.footer-wordmark {
+  margin: 28px 0 0;
+  padding-block: 8px;
+  text-align: center;
+  color: var(--navy);
+  font-family: "Hanken Grotesk", sans-serif;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+}
+.footer-wordmark span {
+  display: inline-block;
+  font-size: 16vw;
+  letter-spacing: 0;
+  vertical-align: top;
+}
+
+/* Widgets stay in the flow, before the wordmark, as the footer comes into view. */
+.floating-widgets,
+.floating-widget-actions {
+  display: contents;
+}
+.floating-widgets.is-footer-visible {
+  display: block;
+  margin-top: 12px;
+  padding: 0;
+  background: var(--cream);
+}
+.floating-widgets.is-footer-visible .floating-widget-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+.floating-widgets.is-footer-visible .wa-fab-wrap,
+.floating-widgets.is-footer-visible .video-greeting {
+  position: static;
+  width: auto;
+  height: auto;
+  max-width: none;
+  animation: none;
+}
+.floating-widgets.is-footer-visible .wa-fab-teaser {
+  display: none;
+}
+.floating-widgets.is-footer-visible .wa-fab,
+.floating-widgets.is-footer-visible .greeting-reopen {
+  min-height: 44px;
+  background: transparent;
+  color: var(--navy);
+  border: 0;
+  box-shadow: none;
+  padding: 0 8px;
+  font-size: 14px;
+  letter-spacing: 0;
+}
+.floating-widgets.is-footer-visible .wa-fab:hover,
+.floating-widgets.is-footer-visible .greeting-reopen:hover {
+  transform: none;
+}
+.floating-widgets.is-footer-visible .wa-glyph {
+  width: 20px;
+  height: 20px;
+}
+.kv-footer .greeting-dialog :is(a, button):focus-visible {
+  outline-color: var(--cream);
+}
+
+@media (max-width: 1100px) and (min-width: 801px) {
+  .footer-layout {
+    gap: 32px;
+    grid-template-columns: minmax(0, 0.65fr) minmax(0, 2fr);
+  }
+}
+@media (max-width: 800px) {
+  .kv-section.contact-section {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+    width: 100%;
+    padding: 40px 22px;
+    text-align: center;
+  }
+  .contact-section > div > p:not(.eyebrow) {
+    margin-inline: auto;
+  }
+  .contact-section .home-form {
+    border-inline-start: 0;
+    border-top: 1px solid var(--line);
+    padding: 32px 0 0;
+  }
+  .contact-section .kv-form {
+    text-align: start;
+  }
+  .contact-section .form-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .contact-section .wa-cta {
+    align-items: center;
+  }
+  .contact-section .contact-direct ul {
+    justify-content: center;
+  }
+  .contact-channels li > a,
+  .contact-channels li > div {
+    width: fit-content;
+    max-width: 100%;
+    margin-inline: auto;
+    text-align: center;
+  }
+  .contact-section .contact-page-channels {
+    margin-top: 28px;
+  }
+  .contact-channel-main {
+    justify-content: center;
+  }
+  .contact-channel-text small {
+    padding-inline-start: 0;
+  }
+  .uk-contact-role {
+    margin-inline: auto;
+    text-align: center;
+  }
+  footer.kv-footer {
+    padding: 32px 22px max(24px, env(safe-area-inset-bottom, 0px));
+    text-align: center;
+  }
+  .footer-layout,
+  .kv-footer .footer-reach {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+  }
+  .footer-intro {
+    align-items: center;
+  }
+  .footer-signature {
+    margin-bottom: 16px;
+  }
+  .footer-navigation {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0 16px;
+    max-width: 360px;
+  }
+  .kv-footer .footer-contact {
+    margin-top: 4px;
+  }
+  .kv-footer .footer-bottom {
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 28px;
+  }
+  .footer-social {
+    justify-content: center;
+    gap: 0 20px;
+  }
+  .footer-legal {
+    text-align: center;
+  }
+  .footer-wordmark {
+    margin-top: 20px;
+  }
+  .floating-widgets {
+    display: block;
+    position: fixed;
+    left: max(22px, env(safe-area-inset-left, 0px));
+    right: max(22px, env(safe-area-inset-right, 0px));
+    bottom: calc(96px + env(safe-area-inset-bottom, 0px));
+    z-index: 46;
+    pointer-events: none;
+  }
+  .floating-widgets.is-docked {
+    position: static;
+    margin-top: 12px;
+    padding: 0;
+    background: var(--cream);
+  }
+  .floating-widget-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .floating-widgets.is-docked .mobile-consultation {
+    display: none;
+  }
+  .mobile-consultation {
+    padding-bottom: max(16px, env(safe-area-inset-bottom, 0px));
+    pointer-events: auto;
+  }
+  .floating-widgets .wa-fab-wrap,
+  .floating-widgets .video-greeting {
+    position: static;
+    width: auto;
+    height: auto;
+    max-width: none;
+    animation: none;
+    pointer-events: auto;
+  }
+  .floating-widgets .wa-fab {
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    justify-content: center;
+  }
+  .floating-widgets .wa-fab-label,
+  .floating-widgets .wa-fab-teaser {
+    display: none;
+  }
+  .floating-widgets .video-greeting[hidden] {
+    display: none;
+  }
+  .floating-widgets .greeting-dialog {
+    pointer-events: auto;
+  }
+  .floating-widgets .greeting-reopen {
+    min-width: 44px;
+    min-height: 44px;
+    padding: 8px 12px;
+    gap: 8px;
+    font-size: 14px;
+    line-height: 20px;
+  }
+  .greeting-reopen .material-symbols-outlined {
+    font-size: 20px;
+    line-height: 1;
+  }
+  .greeting-dialog .greeting-dialog-close {
+    width: 44px;
+    height: 44px;
+  }
+}

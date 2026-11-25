@@ -3,10 +3,10 @@ import { Suspense, lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import FloatingWidgets from "./components/FloatingWidgets";
 import WelcomeIntro from "./components/WelcomeIntro";
 import ScrollToTop from "./components/ScrollToTop";
 import "./styles/services.css";
+import "./styles/contact-footer.css";
 
 const Home = lazy(() => import("./pages/Home"));
 const About = lazy(() => import("./pages/About"));
@@ -51,7 +51,6 @@ export default function App() {
         </Suspense>
       </main>
       <Footer />
-      <FloatingWidgets />
     </div>
   );
 }

@@ -1,13 +1,10 @@
 import { useTranslation } from "../i18n";
-import Icon from "./Icon";
-import WhatsAppIcon from "./WhatsAppIcon";
+import ContactIcon from "./ContactIcon";
 import { whatsappLink } from "../data/siteData";
 import { generalWhatsAppMessage } from "../data/services";
 
 /**
- * Ordered reachability list: an icon tile, the value, and the line under it
- * saying what the channel is for. `tone` is "dark" on the navy footer and
- * "light" on the cream pages.
+ * Ordered contact details, with a small SVG and the purpose of each channel.
  */
 export default function ContactChannels({
   channels,
@@ -27,11 +24,13 @@ export default function ContactChannels({
             : channel.href;
           const body = (
             <>
-              <span className="contact-channel-tile" aria-hidden="true">
-                {isWhatsApp ? <WhatsAppIcon /> : <Icon name={channel.icon} />}
-              </span>
               <span className="contact-channel-text">
-                <strong dir={channel.dir}>{t(channel.value)}</strong>
+                <span className="contact-channel-main">
+                  <span className="contact-channel-tile" aria-hidden="true">
+                    <ContactIcon name={channel.icon} />
+                  </span>
+                  <strong dir={channel.dir}>{t(channel.value)}</strong>
+                </span>
                 <small>{t(channel.note)}</small>
               </span>
             </>

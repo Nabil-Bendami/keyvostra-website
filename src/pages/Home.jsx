@@ -1,8 +1,6 @@
 import { useTranslation } from "../i18n";
 import { Link } from "react-router-dom";
 import InternationalPresence from "../components/InternationalPresence";
-import UKContact from "../components/UKContact";
-import ContactChannels from "../components/ContactChannels";
 import SEO from "../components/SEO";
 import Icon from "../components/Icon";
 import ContactForm from "../components/ContactForm";
@@ -12,7 +10,7 @@ import CinematicHero from "../components/CinematicHero";
 import MotionReveal from "../components/MotionReveal";
 import InvestPreview from "../components/InvestPreview";
 import RealizationsCarousel from "../components/RealizationsCarousel";
-import { contactChannels, testimonials } from "../data/siteData";
+import { testimonials } from "../data/siteData";
 
 const services = [
   {
@@ -220,12 +218,6 @@ export default function Home() {
               "Un investissement en vue ? Un bien à gérer ou à entretenir ? Parlons de vos besoins.",
             )}
           </p>
-          <ContactChannels
-            heading="Nous joindre · Maroc"
-            channels={contactChannels}
-            className="contact-page-channels"
-          />
-          <UKContact />
         </div>
         <div className="home-form">
           <h3>{t("Parlez-nous de votre projet")}</h3>

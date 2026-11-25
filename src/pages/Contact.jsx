@@ -1,9 +1,7 @@
 import { useTranslation } from "../i18n";
 import SEO from "../components/SEO";
 import ContactForm from "../components/ContactForm";
-import ContactChannels from "../components/ContactChannels";
 import WhatsAppButton from "../components/WhatsAppButton";
-import { contactChannels, ukChannels } from "../data/siteData";
 import { generalWhatsAppMessage, serviceCategories } from "../data/services";
 import Icon from "../components/Icon";
 import { Link } from "react-router-dom";
@@ -32,16 +30,6 @@ export default function Contact() {
               "Investissement, gestion ou maintenance : présentez-nous votre projet au Maroc ou au Royaume-Uni pour échanger sur vos besoins.",
             )}
           </p>
-          <ContactChannels
-            heading="Nous joindre · Maroc"
-            channels={contactChannels}
-            className="contact-page-channels"
-          />
-          <ContactChannels
-            heading="Nous joindre · Royaume-Uni"
-            channels={ukChannels}
-            className="contact-page-channels"
-          />
           <WhatsAppButton
             message={generalWhatsAppMessage}
             note="Le plus rapide : un message WhatsApp avec votre ville et votre besoin."

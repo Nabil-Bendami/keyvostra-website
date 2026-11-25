@@ -21,7 +21,7 @@ const assertNoOverflow = async (page) => {
 const assertNoWidgetOverlap = async (page) => {
   const overlaps = await page.evaluate(() => {
     const contacts = document.querySelectorAll(
-      ".contact-section .contact-channels li, .kv-footer a, .kv-footer button, .footer-reach li",
+      ".contact-section .contact-channels li, .footer-layout a, .footer-bottom a, .footer-bottom button, .footer-reach li, .footer-wordmark",
     );
     const widgets = document.querySelectorAll(
       ".wa-fab, .video-greeting, .mobile-consultation",
@@ -44,8 +44,11 @@ for (const width of [320, 375, 390, 430, 768]) {
       const section = page.locator(".contact-section");
       await expect(section).toBeVisible();
       await page.evaluate(() => document.fonts.ready);
-      await expect(section).toHaveCSS("padding", "32px 16px");
-      const countries = section.locator(".contact-channels:visible");
+      await expect(section).toHaveCSS("padding", "40px 22px");
+      await expect(section).toHaveCSS("background-color", "rgb(248, 241, 228)");
+      await expect(section.locator(".contact-channels")).toHaveCount(0);
+      await expect(page.locator(".contact-channels")).toHaveCount(2);
+      const countries = page.locator(".footer-reach .contact-channels");
       await expect(countries).toHaveCount(2);
       await expect(countries.nth(0)).toContainText("Maroc");
       await expect(countries.nth(1)).toContainText("Royaume-Uni");
@@ -60,12 +63,15 @@ for (const width of [320, 375, 390, 430, 768]) {
         await assertNoOverflow(page);
         await assertNoWidgetOverlap(page);
       }
-      await expect(page.locator(".kv-footer")).toHaveCSS("padding", "32px 16px");
-      await expect(page.locator(".footer-reach")).toHaveCSS("row-gap", "28px");
+      await expect(page.locator(".kv-footer")).toHaveCSS("padding", "32px 22px 24px");
+      await expect(page.locator(".kv-footer")).toHaveCSS("background-color", "rgb(248, 241, 228)");
+      await expect(page.locator(".footer-reach")).toHaveCSS("row-gap", "32px");
       const channels = page.locator(".footer-reach");
-      await expect(channels.locator(".contact-channel-tile").first()).toHaveCSS("width", "40px");
+      await expect(channels.locator(".contact-channel-tile").first()).toHaveCSS("width", "20px");
+      await expect(channels.locator(".contact-channel-tile").first()).toHaveCSS("background-color", "rgba(0, 0, 0, 0)");
+      await expect(channels.locator(".contact-icon")).toHaveCount(7);
       await expect(channels.locator("strong").first()).toHaveCSS("font-size", "16px");
-      await expect(channels.locator("strong").first()).toHaveCSS("line-height", "22px");
+      await expect(channels.locator("strong").first()).toHaveCSS("line-height", "24px");
       await expect(channels.locator("small").first()).toHaveCSS("font-size", "14px");
       await expect(channels.locator("small").first()).toHaveCSS("line-height", "20px");
       await expect(channels.locator('a[href="mailto:keyvostrauk.advisory@gmail.com"]'))
@@ -73,11 +79,21 @@ for (const width of [320, 375, 390, 430, 768]) {
       await expect(channels.locator('a[href="tel:+447759017924"]')).toHaveCount(1);
       await expect(channels.locator('a[href="tel:+212684414018"]')).toHaveCount(1);
       await expect(channels.locator('a[href^="https://wa.me/212777884649"]')).toHaveCount(1);
-      for (const link of await page.locator(".kv-footer a, .kv-footer button").all()) {
+      for (const link of await page.locator(".kv-footer a:visible, .kv-footer button:visible").all()) {
         const bounds = await link.boundingBox();
         expect(bounds.width).toBeGreaterThanOrEqual(44);
         expect(bounds.height).toBeGreaterThanOrEqual(44);
       }
+      const wordmark = page.locator(".footer-wordmark");
+      const signature = await wordmark.locator("span").boundingBox();
+      expect(signature.width).toBeGreaterThan((width - 44) * 0.95);
+      expect(signature.x).toBeGreaterThanOrEqual(22);
+      expect(signature.x + signature.width).toBeLessThanOrEqual(width - 22);
+      expect(await wordmark.evaluate((el) => el === el.parentElement.lastElementChild)).toBe(true);
+      await page.evaluate(() => window.scrollTo({ top: document.documentElement.scrollHeight, behavior: "instant" }));
+      await assertNoWidgetOverlap(page);
+      await assertNoOverflow(page);
+      await page.screenshot({ path: `test-results/footer-bottom-${route === "/" ? "home" : "contact"}-${width}.png` });
       const slug = route === "/" ? "home" : "contact";
       await page.locator(".footer-reach").screenshot({
         path: `test-results/${slug}-footer-${width}.png`,
@@ -142,9 +158,13 @@ test("English and Arabic contacts wrap at 320px and 768px", async ({ page }) => 
   }
 });
 
-test("desktop keeps its two country columns and expanded video", async ({ page }) => {
+test("desktop uses country columns and docks widgets before the wordmark", async ({ page }) => {
   for (const width of [1024, 1440]) {
     await page.setViewportSize({ width, height: 1000 });
+    await page.goto("/");
+    await page.locator(".contact-section").waitFor();
+    await expect(page.locator(".greeting-preview")).toBeVisible();
+    await expect(page.locator(".floating-widgets")).toHaveCSS("display", "contents");
     await page.goto("/contact");
     await page.locator(".contact-section").waitFor();
     await assertNoOverflow(page);
@@ -153,12 +173,14 @@ test("desktop keeps its two country columns and expanded video", async ({ page }
     const uk = await countries.nth(1).boundingBox();
     expect(uk.y).toBe(morocco.y);
     expect(uk.x).toBeGreaterThan(morocco.x + morocco.width);
-    await expect(page.locator(".greeting-preview")).toBeVisible();
-    await expect(page.locator(".floating-widgets")).toHaveCSS("display", "contents");
-    await expect(page.locator(".footer-reach .contact-channel-tile").first()).toHaveCSS("width", "42px");
+    await expect(page.locator(".footer-reach .contact-channel-tile").first()).toHaveCSS("width", "20px");
     await page.locator(".kv-footer").scrollIntoViewIfNeeded();
     await expect(page.locator(".floating-widgets")).toHaveClass(/is-footer-visible/);
     await assertNoWidgetOverlap(page);
+    await expect(page.locator(".greeting-reopen")).toBeVisible();
+    const wordmark = await page.locator(".footer-wordmark span").boundingBox();
+    expect(wordmark.x).toBeGreaterThanOrEqual(24);
+    expect(wordmark.x + wordmark.width).toBeLessThanOrEqual(width - 24);
     await page.locator(".kv-footer").screenshot({ path: `test-results/footer-desktop-${width}.png` });
   }
 });
