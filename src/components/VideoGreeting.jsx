@@ -3,25 +3,34 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import Icon from "./Icon";
 
-export default function VideoGreeting() {
+export default function VideoGreeting({ docked = false }) {
   const { t } = useTranslation();
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(
+    () => window.matchMedia("(max-width: 800px)").matches,
+  );
   const [opened, setOpened] = useState(false);
   const [failed, setFailed] = useState(false);
+  const minimized = collapsed || docked;
   const preview = useRef(null);
   const player = useRef(null);
   const dialog = useRef(null);
   const opener = useRef(null);
   const restoreFocus = useRef(false);
   useEffect(() => {
+    const mobile = window.matchMedia("(max-width: 800px)");
+    const sync = () => setCollapsed(mobile.matches);
+    mobile.addEventListener("change", sync);
+    return () => mobile.removeEventListener("change", sync);
+  }, []);
+  useEffect(() => {
     if (!opened && restoreFocus.current) {
-      opener.current?.focus();
+      opener.current?.focus({ preventScroll: true });
       restoreFocus.current = false;
     }
   }, [opened]);
   const [previewPlaying, setPreviewPlaying] = useState(false);
   useEffect(() => {
-    if (collapsed || opened) return;
+    if (minimized || opened) return;
     const el = preview.current;
     const mq = matchMedia("(prefers-reduced-motion: reduce)");
     const sync = () => {
@@ -36,7 +45,7 @@ export default function VideoGreeting() {
       document.removeEventListener("visibilitychange", sync);
       mq.removeEventListener("change", sync);
     };
-  }, [collapsed, opened]);
+  }, [minimized, opened]);
   function open() {
     setOpened(true);
     dialog.current.showModal();
@@ -54,14 +63,18 @@ export default function VideoGreeting() {
   return (
     <>
       <aside
-        className={`video-greeting ${collapsed ? "is-collapsed" : ""}`}
+        className={`video-greeting ${minimized ? "is-collapsed" : ""}`}
         aria-label={t("Présentation vidéo de Keyvostra")}
         hidden={opened}
       >
-        {collapsed ? (
+        {minimized ? (
           <button
+            ref={opener}
             className="greeting-reopen"
-            onClick={() => setCollapsed(false)}
+            onClick={() => {
+              if (docked || window.matchMedia("(max-width: 800px)").matches) open();
+              else setCollapsed(false);
+            }}
             aria-label={t("Afficher la vidéo de présentation")}
           >
             <Icon name="play_arrow" />

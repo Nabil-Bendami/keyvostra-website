@@ -24,7 +24,7 @@ export default function StickyCTA() {
 
   return (
     <div
-      className={`md:hidden fixed bottom-0 left-0 right-0 z-40 px-margin-mobile py-4 bg-surface/95 backdrop-blur-xl border-t border-outline/30 transition-transform duration-300 ${
+      className={`mobile-consultation md:hidden fixed bottom-0 left-0 right-0 z-40 px-margin-mobile py-4 bg-surface/95 backdrop-blur-xl border-t border-outline/30 transition-transform duration-300 ${
         visible ? "translate-y-0" : "translate-y-full"
       }`}
     >

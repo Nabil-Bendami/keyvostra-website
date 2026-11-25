@@ -3,11 +3,9 @@ import { Suspense, lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import StickyCTA from "./components/StickyCTA";
-import VideoGreeting from "./components/VideoGreeting";
+import FloatingWidgets from "./components/FloatingWidgets";
 import WelcomeIntro from "./components/WelcomeIntro";
 import ScrollToTop from "./components/ScrollToTop";
-import WhatsAppFab from "./components/WhatsAppFab";
 import "./styles/services.css";
 
 const Home = lazy(() => import("./pages/Home"));
@@ -53,9 +51,7 @@ export default function App() {
         </Suspense>
       </main>
       <Footer />
-      <StickyCTA />
-      <WhatsAppFab />
-      <VideoGreeting />
+      <FloatingWidgets />
     </div>
   );
 }
